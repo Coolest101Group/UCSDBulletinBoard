@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        xmlns:tools="http://schemas.android.com/tools"
+                                        android:id="@+id/drawer_layout"
+                                        tools:context="com.apress.gerber.ucsdbulletinboard.MainActivity">
+<!-- Main Screen -->
+    <RelativeLayout
+        android:id="@+id/main_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </RelativeLayout>
+
+    <!-- Drawer Pand -->
+    <RelativeLayout
+        android:id="@+id/drawer_pane"
+        android:layout_width="280dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start">
+
+        <!-- Top Profile Box -->
+        <RelativeLayout
+            android:id="@+id/profile_box"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@color/material_blue_grey_800"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/icon"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/users81"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_toRightOf="@+id/icon"
+                android:layout_marginLeft="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Demo Student"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#fff"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="This is your personal bulletin board."
+                    android:textSize="16sp"
+                    android:textColor="#fff"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <!-- Navigation ListView -->
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/nav_list"
+            android:layout_below="@+id/profile_box"
+            android:choiceMode="singleChoice"
+            android:background="#ffffff">
+
+        </ListView>
+
+    </RelativeLayout>
+
+
+</android.support.v4.widget.DrawerLayout>
