@@ -22,6 +22,7 @@ import com.apress.gerber.ucsdbulletinboard.adapter.NavListAdapter;
 import com.apress.gerber.ucsdbulletinboard.models.NavItem;
 
 import com.apress.gerber.ucsdbulletinboard.fragments.*;
+import com.firebase.client.Firebase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,9 +41,17 @@ public class MainActivity extends ActionBarActivity{
 
     ActionBarDrawerToggle mActionBarDrawerToggle;
 
+    //our database object
+    Firebase databaseRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //setup firebase database for our accounts and message storage
+        Firebase.setAndroidContext(this);
+        databaseRef = new Firebase("https://glaring-heat-815.firebaseio.com/");
+
         setContentView(R.layout.activity_main);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -125,6 +134,11 @@ public class MainActivity extends ActionBarActivity{
 
         mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);
 
+    }
+
+    //get method for our databse to use in different fragments
+    public Firebase getdb() {
+        return databaseRef;
     }
 
     @Override
