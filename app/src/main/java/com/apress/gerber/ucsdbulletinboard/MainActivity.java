@@ -1,6 +1,7 @@
 package com.apress.gerber.ucsdbulletinboard;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
@@ -153,10 +154,20 @@ public class MainActivity extends ActionBarActivity{
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        if (mActionBarDrawerToggle.onOptionsItemSelected(item))
-            return true;
 
-        return super.onOptionsItemSelected(item);
+        switch(item.getItemId()) {
+            case R.id.create_event:
+                Intent intent = new Intent(this, CreateEvent.class);
+                this.startActivity(intent);
+                break;
+            case R.id.action_settings:
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+
+        return true;
     }
 
     @Override
