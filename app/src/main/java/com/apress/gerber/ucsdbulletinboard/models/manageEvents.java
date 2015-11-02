@@ -65,7 +65,7 @@ public class manageEvents {
 
         myEvent event = new myEvent(eventName, eventTime, eventDesc);
 
-        db.child("users").child(String.valueOf(eventNumber)).setValue(event);
+        db.child("events").child(String.valueOf(eventNumber)).setValue(event);
         return true;
     }
 }
