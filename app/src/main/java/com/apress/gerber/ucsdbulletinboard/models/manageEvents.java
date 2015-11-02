@@ -7,7 +7,7 @@ import java.util.Random;
 /**
  * This class gets and pushes events to the database
  */
-public class fetchEvents {
+public class manageEvents {
 
     private class myEvent{
         private String mEventName;
@@ -29,7 +29,7 @@ public class fetchEvents {
     String[] mEventDescription;
     String[] mMasterList;
 
-    public fetchEvents (Firebase db){
+    public manageEvents(Firebase db){
         this.db = db;
     }
 
