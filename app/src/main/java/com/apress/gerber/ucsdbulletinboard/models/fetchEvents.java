@@ -5,7 +5,7 @@ import com.firebase.client.Firebase;
 import java.util.Random;
 
 /**
- * Created by danielmartin on 11/2/15.
+ * This class gets and pushes events to the database
  */
 public class fetchEvents {
 
@@ -49,6 +49,16 @@ public class fetchEvents {
         return mMasterList;
     }
 
+    /*
+     *  Post an event to the db.  ALL parameters
+     *  are strings!!!!
+     *
+     *  @param eventName - the name of the event
+     *         eventTime - the time of the event
+     *         eventDesc - the description of the event
+     *
+     *  @return Returns true if the operation completed succesfully
+     */
     public boolean postEvent(String eventName, String eventTime, String eventDesc){
         Random randomGenerator = new Random();
         int eventNumber = randomGenerator.nextInt();
