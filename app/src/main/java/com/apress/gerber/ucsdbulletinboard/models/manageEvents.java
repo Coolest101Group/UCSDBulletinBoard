@@ -60,11 +60,15 @@ public class manageEvents {
      *  @return Returns true if the operation completed succesfully
      */
     public boolean postEvent(String eventName, String eventTime, String eventDesc){
+
+        // Generate random number
         Random randomGenerator = new Random();
         int eventNumber = randomGenerator.nextInt();
 
+        // Create new myEvent object with the info
         myEvent event = new myEvent(eventName, eventTime, eventDesc);
 
+        // Push event to db, the id of the event is the random number
         db.child("events").child(String.valueOf(eventNumber)).setValue(event);
         return true;
     }
