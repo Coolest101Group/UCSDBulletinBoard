@@ -155,6 +155,11 @@ public class MainActivity extends ActionBarActivity{
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
 
+        if(mActionBarDrawerToggle.onOptionsItemSelected(item))
+        {
+            return true;
+        }
+
         switch(item.getItemId()) {
             case R.id.create_event:
                 Intent intent = new Intent(this, CreateEvent.class);
@@ -167,7 +172,7 @@ public class MainActivity extends ActionBarActivity{
 
         }
 
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
