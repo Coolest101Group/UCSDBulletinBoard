@@ -25,7 +25,7 @@ public class Login extends Fragment {
         Firebase databaseRef = ((MainActivity)getActivity()).getdb();
 
         //sending a test message to see if the database is receiving data
-        databaseRef.child("message").setValue("Hey I clicked login! Am I sending data? poop");
+        databaseRef.child("message").setValue("Hey I clicked login! Am I sending data?");
 
         View mV = inflater.inflate(R.layout.fragment_login, container, false);
         return mV;
