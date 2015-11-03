@@ -27,7 +27,7 @@ public class Login extends Fragment {
         //sending a test message to see if the database is receiving data
         databaseRef.child("message").setValue("Hey I clicked login! Am I sending data?");
 
-        View mV = inflater.inflate(R.layout.fragment_login, container, false);
+        View mV = inflater.inflate(R.layout.activity_login, container, false);
         return mV;
     }
 }
