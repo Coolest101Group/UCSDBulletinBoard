@@ -1,27 +1,21 @@
 package com.apress.gerber.ucsdbulletinboard.models;
 
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 
 import java.util.Random;
+
+import com.apress.gerber.ucsdbulletinboard.*;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.Query;
 
 /**
  * This class gets and pushes events to the database
  */
 public class manageEvents {
 
-    private class myEvent{
-        private String mEventName;
-        private String mEventTime;
-        private String mEventDesc;
 
-        public myEvent(){}
-
-        public myEvent(String mEN, String mET, String mED){
-            mEventName = mEN;
-            mEventTime = mET;
-            mEventDesc = mED;
-        }
-    }
 
     private Firebase db;
     String[] mEventNames;
@@ -70,6 +64,39 @@ public class manageEvents {
 
         // Push event to db, the id of the event is the random number
         db.child("events").child(String.valueOf(eventNumber)).setValue(event);
+        return true;
+    }
+
+    public boolean parseEvents(){
+        Query queryDB = db.orderByChild("events");
+        queryDB.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                myEvent singleEv = dataSnapshot.getValue(myEvent.class);
+
+                // TODO: Add this event to a stack and maybe to arrays
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        })
         return true;
     }
 }
