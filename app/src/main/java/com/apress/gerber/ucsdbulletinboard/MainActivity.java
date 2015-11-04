@@ -44,6 +44,7 @@ public class MainActivity extends ActionBarActivity{
 
     //our database object
     public static Firebase databaseRef;
+    public static manageEvents mDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +56,7 @@ public class MainActivity extends ActionBarActivity{
 
         setContentView(R.layout.activity_main);
         ////////
-        manageEvents mDB = new manageEvents(databaseRef);
-        mDB.postEvent("Law Fair", "4 November 11 am", "UCSD College Law Fair" );
+        mDB = new manageEvents(databaseRef);
 
 
         ///////
