@@ -12,45 +12,45 @@
         android:id="@+id/create_event_toolbar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:minHeight="100dp">
-        <ScrollView
+        android:minHeight="10dp">
+    </android.support.v7.widget.Toolbar>
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:text="@string/create_event_title"
+                android:textSize="30dp"
+                android:paddingBottom="10dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="@string/input_event_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <DatePicker
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+            </DatePicker>
+            <TextView
+                android:text="@string/input_event_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+            <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:text="@string/create_event_title"
-                    android:textSize="30dp"
-                    android:paddingBottom="10dp"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:text="@string/input_event_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <EditText
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" />
-
-                <DatePicker
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content">
-                </DatePicker>
-                <TextView
-                    android:text="@string/input_event_description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <EditText
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" />
-                <Button
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/submit_event_button"/>
-            </LinearLayout>
-        </ScrollView>
-    </android.support.v7.widget.Toolbar>
+                android:text="@string/submit_event_button"/>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
