@@ -8,41 +8,49 @@
     android:orientation="vertical"
     tools:context="com.apress.gerber.ucsdbulletinboard.CreateEvent">
 
-    <ScrollView
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/create_event_toolbar"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
+        android:layout_height="wrap_content"
+        android:minHeight="100dp">
+        <ScrollView
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                android:text="Create Event"
-                android:textSize="30dp"
-                android:paddingBottom="10dp"
+            android:layout_height="wrap_content">
+            <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:text="Title: "
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <EditText
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:text="@string/create_event_title"
+                    android:textSize="30dp"
+                    android:paddingBottom="10dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="@string/input_event_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
 
-            <DatePicker
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
-
-            </DatePicker>
-
-            <TextView
-                android:text="Description: "
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <EditText
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-    </ScrollView>
+                <DatePicker
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+                </DatePicker>
+                <TextView
+                    android:text="@string/input_event_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+                <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/submit_event_button"/>
+            </LinearLayout>
+        </ScrollView>
+    </android.support.v7.widget.Toolbar>
 
 </LinearLayout>
