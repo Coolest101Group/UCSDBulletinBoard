@@ -9,4 +9,5 @@
     <string name="drawer_opened">Drawer Opened</string>
     <string name="drawer_closed">Drawer Closed</string>
     <string name="title_activity_create_account">CreateAccountAct</string>
+    <string name="create_new_event">Create New Event</string>
 </resources>
