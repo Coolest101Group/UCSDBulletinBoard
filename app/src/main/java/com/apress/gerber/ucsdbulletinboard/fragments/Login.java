@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
@@ -24,10 +25,14 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.apress.gerber.ucsdbulletinboard.CreateAccountAct;
+import com.apress.gerber.ucsdbulletinboard.CreateEvent;
 import com.apress.gerber.ucsdbulletinboard.LoginActivity;
 import com.apress.gerber.ucsdbulletinboard.MainActivity;
 import com.apress.gerber.ucsdbulletinboard.R;
+import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 
@@ -82,6 +87,15 @@ public class Login extends Fragment {
             }
         });
 
+        Button mRegisterButton = (Button) mV.findViewById(R.id.create_new_account_button);
+        mRegisterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CreateAccountAct.class);
+                startActivity(intent);
+            }
+        });
+
         mLoginFormView = mV.findViewById(R.id.login_form);
         mProgressView = mV.findViewById(R.id.login_progress);
 
@@ -92,6 +106,8 @@ public class Login extends Fragment {
     private static final String[] DUMMY_CREDENTIALS = new String[]{
             "foo@example.com:hello", "bar@example.com:world"
     };
+
+
 
     /**
      * Attempts to sign in or register the account specified by the login form.
@@ -142,8 +158,26 @@ public class Login extends Fragment {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
+            MainActivity.databaseRef.authWithPassword(email, password, new Firebase.AuthResultHandler() {
+                @Override
+                public void onAuthenticated(AuthData authData) {
+                    showProgress(false); //stop progress spinner
+                    Toast.makeText(getActivity(), "Login successful", Toast.LENGTH_LONG).show(); //success message
+                    //TODO: do successful login changes like updating gui with account name
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    startActivity(intent);
+                }
+
+                @Override
+                public void onAuthenticationError(FirebaseError firebaseError) {
+                    // there was an error
+                    showProgress(false); //stop progress spinner
+                    Toast.makeText(getActivity(), firebaseError.getMessage(), Toast.LENGTH_LONG).show(); //error message
+                }
+            });
+            //code from the skeleton. decide what to do with it later
+            //mAuthTask = new UserLoginTask(email, password);
+            //mAuthTask.execute((Void) null);
         }
     }
 

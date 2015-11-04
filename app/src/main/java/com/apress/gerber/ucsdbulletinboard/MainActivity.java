@@ -43,7 +43,7 @@ public class MainActivity extends ActionBarActivity{
     ActionBarDrawerToggle mActionBarDrawerToggle;
 
     //our database object
-    Firebase databaseRef;
+    public static Firebase databaseRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
