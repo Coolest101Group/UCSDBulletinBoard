@@ -20,7 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.TabHost;
 
 import com.apress.gerber.ucsdbulletinboard.adapter.NavListAdapter;
-import com.apress.gerber.ucsdbulletinboard.models.NavItem;
+import com.apress.gerber.ucsdbulletinboard.models.*;
 
 import com.apress.gerber.ucsdbulletinboard.fragments.*;
 import com.firebase.client.Firebase;
@@ -54,6 +54,12 @@ public class MainActivity extends ActionBarActivity{
         databaseRef = new Firebase("https://glaring-heat-815.firebaseio.com/");
 
         setContentView(R.layout.activity_main);
+        ////////
+        manageEvents mDB = new manageEvents(databaseRef);
+        mDB.postEvent("Law Fair", "4 November 11 am", "UCSD College Law Fair" );
+
+
+        ///////
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

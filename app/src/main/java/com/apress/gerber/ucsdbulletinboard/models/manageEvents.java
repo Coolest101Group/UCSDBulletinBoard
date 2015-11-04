@@ -5,10 +5,13 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 
 import java.util.Random;
+import java.util.Stack;
+import java.util.Vector;
 
 import com.apress.gerber.ucsdbulletinboard.*;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
+import com.firebase.client.ValueEventListener;
 
 /**
  * This class gets and pushes events to the database
@@ -18,28 +21,29 @@ public class manageEvents {
 
 
     private Firebase db;
-    String[] mEventNames;
-    String[] mEventTimes;
-    String[] mEventDescription;
-    String[] mMasterList;
+    Vector<String> mEventNames;
+    Vector<String> mEventTimes;
+    Vector<String> mEventDescription;
+    Vector<String> mMasterList;
+    Stack<myEvent> mEventStack;
 
     public manageEvents(Firebase db){
         this.db = db;
     }
 
-    public String[] getEventNames(){
+    public Vector<String> getEventNames(){
         return mEventNames;
     }
 
-    public String[] getEventTimes(){
+    public Vector<String> getEventTimes(){
         return mEventTimes;
     }
 
-    public String[] getEventDescription(){
+    public Vector<String> getEventDescription(){
         return mEventDescription;
     }
 
-    public String[] getMasterList(){
+    public Vector<String> getMasterList(){
         return mMasterList;
     }
 
@@ -63,32 +67,26 @@ public class manageEvents {
         myEvent event = new myEvent(eventName, eventTime, eventDesc);
 
         // Push event to db, the id of the event is the random number
-        db.child("events").child(String.valueOf(eventNumber)).setValue(event);
+        Firebase eventRef = MainActivity.databaseRef.child("events").child(String.valueOf(eventNumber));
+        eventRef.setValue(event);
+
         return true;
     }
 
     public boolean parseEvents(){
-        Query queryDB = db.orderByChild("events");
-        queryDB.addChildEventListener(new ChildEventListener() {
+
+        Firebase ref = MainActivity.databaseRef.child("events");
+
+        ref.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                myEvent singleEv = dataSnapshot.getValue(myEvent.class);
-
-                // TODO: Add this event to a stack and maybe to arrays
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot eventSnapshot : dataSnapshot.getChildren()) {
+                    myEvent singleEvent = eventSnapshot.getValue(myEvent.class);
+                    mEventStack.push(singleEvent);
+                    mEventNames.add(singleEvent.getEventName());
+                    mEventTimes.add(singleEvent.getEventTime());
+                    mEventDescription.add(singleEvent.getEventDesc());
+                }
 
             }
 
@@ -96,7 +94,12 @@ public class manageEvents {
             public void onCancelled(FirebaseError firebaseError) {
 
             }
-        })
+        });
+
         return true;
+    }
+
+    public Stack<myEvent> getEventStack() {
+        return mEventStack;
     }
 }

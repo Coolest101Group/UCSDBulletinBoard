@@ -5,7 +5,19 @@ package com.apress.gerber.ucsdbulletinboard;
  */
 public class myEvent {
 
-        private String mEventName;
+    public String getEventName() {
+        return mEventName;
+    }
+
+    public String getEventTime() {
+        return mEventTime;
+    }
+
+    public String getEventDesc() {
+        return mEventDesc;
+    }
+
+    private String mEventName;
         private String mEventTime;
         private String mEventDesc;
 
@@ -16,5 +28,6 @@ public class myEvent {
             mEventTime = mET;
             mEventDesc = mED;
         }
+
 
 }
