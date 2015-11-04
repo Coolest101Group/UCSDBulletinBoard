@@ -53,13 +53,9 @@ public class MainActivity extends ActionBarActivity{
         //setup firebase database for our accounts and message storage
         Firebase.setAndroidContext(this);
         databaseRef = new Firebase("https://glaring-heat-815.firebaseio.com/");
-
-        setContentView(R.layout.activity_main);
-        ////////
         mDB = new manageEvents(databaseRef);
 
-
-        ///////
+        setContentView(R.layout.activity_main);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

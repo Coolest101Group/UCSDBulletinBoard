@@ -51,20 +51,23 @@ public class manageEvents {
      *  Post an event to the db.  ALL parameters
      *  are strings!!!!
      *
-     *  @param eventName - the name of the event
-     *         eventTime - the time of the event
-     *         eventDesc - the description of the event
+     *  @param eventName   the name of the event
+     *  @param eventTime   the time of the event
+     *  @param eventDesc   the description of the event
+     *  @param day         the day of the event
+     *  @param month       the month of the event
+     *  @param year        the year of the event
      *
      *  @return Returns true if the operation completed succesfully
      */
-    public boolean postEvent(String eventName, String eventTime, String eventDesc){
+    public boolean postEvent(String eventName, String eventTime, String eventDesc, int day, int month, int year){
 
         // Generate random number
         Random randomGenerator = new Random();
         int eventNumber = randomGenerator.nextInt();
 
         // Create new myEvent object with the info
-        myEvent event = new myEvent(eventName, eventTime, eventDesc);
+        myEvent event = new myEvent(eventName, eventTime, eventDesc, day, month, year);
 
         // Push event to db, the id of the event is the random number
         Firebase eventRef = MainActivity.databaseRef.child("events").child(String.valueOf(eventNumber));
@@ -73,6 +76,10 @@ public class manageEvents {
         return true;
     }
 
+    /*
+     * Fetches the events from the database and adds them to a stack
+     * and a list.
+     */
     public boolean parseEvents(){
 
         Firebase ref = MainActivity.databaseRef.child("events");
