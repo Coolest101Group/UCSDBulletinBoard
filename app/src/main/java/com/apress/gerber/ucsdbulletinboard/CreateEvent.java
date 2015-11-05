@@ -2,6 +2,7 @@ package com.apress.gerber.ucsdbulletinboard;
 
 import android.app.ActionBar;
 import android.content.Intent;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
@@ -11,8 +12,13 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import com.apress.gerber.ucsdbulletinboard.*;
+import com.apress.gerber.ucsdbulletinboard.fragments.FeaturedEvents;
 import com.apress.gerber.ucsdbulletinboard.models.manageEvents;
+
+import java.util.concurrent.TimeUnit;
 
 public class CreateEvent extends AppCompatActivity {
 
@@ -52,7 +58,7 @@ public class CreateEvent extends AppCompatActivity {
         return true;
     }
 
-    public boolean addEventDB(){
+    public boolean addEventDB() {
         // Reset errors
         eTitleView.setError(null);
         eDescView.setError(null);
@@ -69,7 +75,24 @@ public class CreateEvent extends AppCompatActivity {
                 .append("-").append(day).append("-").append(year)
                 .append(" ").toString();
 
-        MainActivity.mDB.postEvent(mTitle, mDate, mDesc, day, month, year);
+        boolean success = MainActivity.mDB.postEvent(mTitle, mDate, mDesc, day, month, year);
+        if(success){
+
+            this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getApplicationContext(), "Event added successfully.", Toast.LENGTH_LONG).show();
+                }
+            });
+
+            Intent intent = new Intent(this, FeaturedEvents.class);
+            this.startActivity(intent);
+
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "Error.", Toast.LENGTH_LONG).show();
+        }
+
         return true;
     }
 }

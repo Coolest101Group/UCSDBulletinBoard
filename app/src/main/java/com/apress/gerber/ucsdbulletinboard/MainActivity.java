@@ -35,10 +35,10 @@ public class MainActivity extends ActionBarActivity{
 
     DrawerLayout mDrawerLayout;
     RelativeLayout mDrawerPane;
-    ListView lvNav;
+    public static ListView lvNav;
 
-    List<NavItem> mNavItemList;
-    List<Fragment> mFragmentList;
+    public static List<NavItem> mNavItemList;
+    public static List<Fragment> mFragmentList;
 
     ActionBarDrawerToggle mActionBarDrawerToggle;
 
