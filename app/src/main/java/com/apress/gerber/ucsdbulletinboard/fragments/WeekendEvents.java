@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.apress.gerber.ucsdbulletinboard.CreateEvent;
 import com.apress.gerber.ucsdbulletinboard.R;
@@ -24,6 +25,15 @@ public class WeekendEvents extends Fragment {
 
         Button createEvent = (Button) mV.findViewById(R.id.create_event_page_button);
         createEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CreateEvent.class);
+                startActivity(intent);
+            }
+        });
+        ImageView addPNG = (ImageView) mV.findViewById(R.id.add_new_event_png);
+        addPNG.setImageResource(R.drawable.add182);
+        addPNG.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), CreateEvent.class);
