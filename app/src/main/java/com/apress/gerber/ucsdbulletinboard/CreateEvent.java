@@ -77,6 +77,7 @@ public class CreateEvent extends AppCompatActivity {
         // Reset errors
         eTitleView.setError(null);
         eDescView.setError(null);
+        boolean success = false;
 
         String mTitle = eTitleView.getText().toString();
         String mDesc = eDescView.getText().toString();
@@ -87,7 +88,12 @@ public class CreateEvent extends AppCompatActivity {
         String mDate = new StringBuilder().append(month +1)
                 .append("-").append(day).append("-").append(year)
                 .append(" ").toString();
-        boolean success = MainActivity.mDB.postEvent(mTitle, mDate, mDesc, day, month, year);
+        if(eImage == null){
+            success = MainActivity.mDB.postEvent(mTitle, mDate, mDesc, day, month, year);
+        }
+        else{
+            success = MainActivity.mDB.postEvent(mTitle, mDate, mDesc, day, month, year, eImage);
+        }
         if(success){
             //Intent intent = new Intent(this, FeaturedEvents.class);
             //this.startActivity(intent);

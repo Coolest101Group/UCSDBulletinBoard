@@ -1,5 +1,9 @@
 package com.apress.gerber.ucsdbulletinboard;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+
 /**
  * Created by danielmartin on 11/3/15.
  */
@@ -12,16 +16,18 @@ public class myEvent {
     private int month;
     private int year;
     private int integerDate;
+    private String image;
 
     public myEvent(){}
 
-    public myEvent(String mEN, String mET, String mED, int day, int month, int year){
+    public myEvent(String mEN, String mET, String mED, int day, int month, int year, String image){
         mEventName = mEN;
         mEventTime = mET;
         mEventDesc = mED;
         this.day = day;
         this.month = month;
         this.year = year;
+        this.image = image;
 
         String tt = new StringBuilder().append(year).append(month).append(day).toString();
         integerDate = Integer.parseInt(tt);
@@ -53,6 +59,18 @@ public class myEvent {
 
     public int getIntegerDate() {
         return integerDate;
+    }
+
+    public String getImage() { return image;}
+
+    public static Bitmap getImageBitmap(String input){
+        byte[] decodedByte = Base64.decode(input, 0);
+        return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
+    }
+
+    public Bitmap getImageBitmap(){
+        byte[] decodedByte = Base64.decode(image, 0);
+        return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
     }
 
 

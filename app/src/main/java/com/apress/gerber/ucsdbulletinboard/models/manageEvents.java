@@ -1,9 +1,13 @@
 package com.apress.gerber.ucsdbulletinboard.models;
 
+import android.graphics.Bitmap;
+import android.util.Base64;
+
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 
+import java.io.ByteArrayOutputStream;
 import java.util.Random;
 import java.util.Stack;
 import java.util.Vector;
@@ -67,7 +71,7 @@ public class manageEvents {
         int eventNumber = randomGenerator.nextInt();
 
         // Create new myEvent object with the info
-        myEvent event = new myEvent(eventName, eventTime, eventDesc, day, month, year);
+        myEvent event = new myEvent(eventName, eventTime, eventDesc, day, month, year, "null");
 
         // Push event to db, the id of the event is the random number
         Firebase eventRef = MainActivity.databaseRef.child("events").child(String.valueOf(eventNumber));
@@ -75,6 +79,29 @@ public class manageEvents {
 
         return true;
     }
+    public boolean postEvent(String eventName, String eventTime, String eventDesc, int day, int month, int year, Bitmap image){
+
+        // Encode image to string
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object
+        byte[] byteArrayImage = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(byteArrayImage, Base64.DEFAULT);
+
+        // Generate random number
+        Random randomGenerator = new Random();
+        int eventNumber = randomGenerator.nextInt();
+
+        // Create new myEvent object with the info
+        myEvent event = new myEvent(eventName, eventTime, eventDesc, day, month, year, encodedImage);
+
+        // Push event to db, the id of the event is the random number
+        Firebase eventRef = MainActivity.databaseRef.child("events").child(String.valueOf(eventNumber));
+        eventRef.setValue(event);
+
+        return true;
+    }
+
+
 
     /*
      * Fetches the events from the database and adds them to a stack
