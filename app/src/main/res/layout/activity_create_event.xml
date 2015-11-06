@@ -50,6 +50,32 @@
                 android:id="@+id/event_description"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
+            <LinearLayout
+                android:id="@+id/LinearLayout02"
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:layout_alignParentBottom="true">
+                <Button
+                    android:id="@+id/select_from_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" android:text="Take New Photo"
+                    android:onClick="btnGetCameraPhotoClicked">
+                </Button>
+                <Button
+                    android:id="@+id/select_from_gallery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Open Existing Image"
+                    android:onClick="btnGetGalleryClicked"
+                    android:nestedScrollingEnabled="true">
+                </Button>
+            </LinearLayout>
+            <ImageView
+                android:id="@+id/iViewPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
             <Button
                 android:id="@+id/event_sign_up_button"
                 android:layout_width="fill_parent"
