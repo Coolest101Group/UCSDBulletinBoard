@@ -20,7 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.TabHost;
 
 import com.apress.gerber.ucsdbulletinboard.adapter.NavListAdapter;
-import com.apress.gerber.ucsdbulletinboard.models.NavItem;
+import com.apress.gerber.ucsdbulletinboard.models.*;
 
 import com.apress.gerber.ucsdbulletinboard.fragments.*;
 import com.firebase.client.Firebase;
@@ -35,15 +35,16 @@ public class MainActivity extends ActionBarActivity{
 
     DrawerLayout mDrawerLayout;
     RelativeLayout mDrawerPane;
-    ListView lvNav;
+    public static ListView lvNav;
 
-    List<NavItem> mNavItemList;
-    List<Fragment> mFragmentList;
+    public static List<NavItem> mNavItemList;
+    public static List<Fragment> mFragmentList;
 
     ActionBarDrawerToggle mActionBarDrawerToggle;
 
     //our database object
     public static Firebase databaseRef;
+    public static manageEvents mDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,7 @@ public class MainActivity extends ActionBarActivity{
         //setup firebase database for our accounts and message storage
         Firebase.setAndroidContext(this);
         databaseRef = new Firebase("https://glaring-heat-815.firebaseio.com/");
+        mDB = new manageEvents(databaseRef);
 
         setContentView(R.layout.activity_main);
 

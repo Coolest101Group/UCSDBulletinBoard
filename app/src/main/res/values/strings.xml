@@ -10,4 +10,6 @@
     <string name="drawer_closed">Drawer Closed</string>
     <string name="title_activity_create_account">CreateAccountAct</string>
     <string name="create_new_event">Create New Event</string>
+    <string name="pick_time">Click to Pick a Time</string>
+    <string name="pick_date">Click to Pick a Date</string>
 </resources>
