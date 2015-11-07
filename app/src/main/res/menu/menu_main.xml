@@ -10,4 +10,7 @@
 
     <item android:id="@+id/create_event"
           android:title="+"/>
+
+    <item android:id="@+id/activity_profile"
+          android:title="Profile"/>
 </menu>

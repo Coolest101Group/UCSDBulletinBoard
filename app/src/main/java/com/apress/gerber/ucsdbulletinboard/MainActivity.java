@@ -169,6 +169,10 @@ public class MainActivity extends ActionBarActivity{
                 break;
             case R.id.action_settings:
                 break;
+            case R.id.activity_profile:
+                Intent intent2 = new Intent(this, Profile.class);
+                this.startActivity(intent2);
+                break;
             default:
                 return super.onOptionsItemSelected(item);
 
