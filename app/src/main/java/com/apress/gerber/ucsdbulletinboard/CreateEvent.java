@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -20,6 +21,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.widget.TextView;
 
 import com.apress.gerber.ucsdbulletinboard.*;
 import com.apress.gerber.ucsdbulletinboard.fragments.FeaturedEvents;
@@ -39,6 +41,12 @@ public class CreateEvent extends AppCompatActivity {
     private DatePicker ePicker;
     private Bitmap eImage;
     private ImageView imgEvent;
+    private String time;
+    public static int hr;
+    public static int min;
+    public static int yr;
+    public static int mnth;
+    public static int day;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +62,6 @@ public class CreateEvent extends AppCompatActivity {
         // Get event information from create_event fragment
         eTitleView = (EditText)findViewById(R.id.event_title);
         eDescView = (EditText)findViewById(R.id.event_description);
-        ePicker = (DatePicker)findViewById(R.id.event_date);
         imgEvent = (ImageView) findViewById(R.id.iViewPhoto);
 
         // When user clicks "create" button invoke 'addEvent()' method
@@ -81,18 +88,21 @@ public class CreateEvent extends AppCompatActivity {
 
         String mTitle = eTitleView.getText().toString();
         String mDesc = eDescView.getText().toString();
-        int year = ePicker.getYear();
-        int month = ePicker.getMonth();
-        int day = ePicker.getDayOfMonth();
+        int year = yr;
+        int month = mnth;
+        int day = this.day;
 
-        String mDate = new StringBuilder().append(month +1)
+
+
+
+        String mDate = new StringBuilder().append(month)
                 .append("-").append(day).append("-").append(year)
                 .append(" ").toString();
         if(eImage == null){
-            success = MainActivity.mDB.postEvent(mTitle, mDate, mDesc, day, month, year);
+            success = MainActivity.mDB.postEvent(mTitle, mDate, mDesc, day, month, year, hr, min);
         }
         else{
-            success = MainActivity.mDB.postEvent(mTitle, mDate, mDesc, day, month, year, eImage);
+            success = MainActivity.mDB.postEvent(mTitle, mDate, mDesc, day, month, year, hr, min, eImage);
         }
         if(success){
             //Intent intent = new Intent(this, FeaturedEvents.class);
@@ -161,6 +171,17 @@ public class CreateEvent extends AppCompatActivity {
 
 
     }
+
+    public void showTimePickerDialog(View v) {
+        TimePickerFragment newFragment = new TimePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "timePicker");
+    }
+
+    public void showDatePickerDialog(View v) {
+        DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "datePicker");
+    }
+
 
 
 

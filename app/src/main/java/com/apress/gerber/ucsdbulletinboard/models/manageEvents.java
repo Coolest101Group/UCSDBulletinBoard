@@ -64,14 +64,15 @@ public class manageEvents {
      *
      *  @return Returns true if the operation completed succesfully
      */
-    public boolean postEvent(String eventName, String eventTime, String eventDesc, int day, int month, int year){
+    public boolean postEvent(String eventName, String eventTime, String eventDesc, int day,
+                             int month, int year, int hour, int min){
 
         // Generate random number
         Random randomGenerator = new Random();
         int eventNumber = randomGenerator.nextInt();
 
         // Create new myEvent object with the info
-        myEvent event = new myEvent(eventName, eventTime, eventDesc, day, month, year, "null");
+        myEvent event = new myEvent(eventName, eventTime, eventDesc, day, month, year, hour, min, "null");
 
         // Push event to db, the id of the event is the random number
         Firebase eventRef = MainActivity.databaseRef.child("events").child(String.valueOf(eventNumber));
@@ -79,7 +80,8 @@ public class manageEvents {
 
         return true;
     }
-    public boolean postEvent(String eventName, String eventTime, String eventDesc, int day, int month, int year, Bitmap image){
+    public boolean postEvent(String eventName, String eventTime, String eventDesc, int day,
+                             int month, int year, int hour, int min, Bitmap image){
 
         // Encode image to string
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -92,7 +94,7 @@ public class manageEvents {
         int eventNumber = randomGenerator.nextInt();
 
         // Create new myEvent object with the info
-        myEvent event = new myEvent(eventName, eventTime, eventDesc, day, month, year, encodedImage);
+        myEvent event = new myEvent(eventName, eventTime, eventDesc, day, month, year, hour, min, encodedImage);
 
         // Push event to db, the id of the event is the random number
         Firebase eventRef = MainActivity.databaseRef.child("events").child(String.valueOf(eventNumber));
@@ -135,5 +137,25 @@ public class manageEvents {
 
     public Stack<myEvent> getEventStack() {
         return mEventStack;
+    }
+    public static String getTimeString(int hour, int minute){
+        String time;
+        int nH;
+
+        if (hour == 12){
+            time = "pm";
+            nH = 12;
+        }
+        else if(hour > 12){
+            time = "pm";
+            nH = hour - 12;
+        }
+        else{
+            time = "am";
+            nH = hour;
+        }
+        return new StringBuilder().append(nH).append(":").append(minute)
+                .append(" ").append(time).toString();
+
     }
 }

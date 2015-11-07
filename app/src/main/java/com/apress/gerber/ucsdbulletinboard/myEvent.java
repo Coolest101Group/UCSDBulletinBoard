@@ -15,12 +15,22 @@ public class myEvent {
     private int day;
     private int month;
     private int year;
+    private int minute;
+    private int hour;
     private int integerDate;
     private String image;
 
     public myEvent(){}
 
-    public myEvent(String mEN, String mET, String mED, int day, int month, int year, String image){
+    public int getMinute() {
+        return minute;
+    }
+
+    public int getHour() {
+        return hour;
+    }
+
+    public myEvent(String mEN, String mET, String mED, int day, int month, int year, int hr, int mn, String image){
         mEventName = mEN;
         mEventTime = mET;
         mEventDesc = mED;
@@ -28,6 +38,8 @@ public class myEvent {
         this.month = month;
         this.year = year;
         this.image = image;
+        this.minute = mn;
+        this.hour = hr;
 
         String tt = new StringBuilder().append(year).append(month).append(day).toString();
         integerDate = Integer.parseInt(tt);
@@ -71,6 +83,27 @@ public class myEvent {
     public Bitmap getImageBitmap(){
         byte[] decodedByte = Base64.decode(image, 0);
         return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
+    }
+
+    public static String getTimeString(int hour, int minute){
+        String time;
+        int nH;
+
+        if (hour == 12){
+            time = "pm";
+            nH = 12;
+        }
+        else if(hour > 12){
+            time = "pm";
+            nH = hour - 12;
+        }
+        else{
+            time = "am";
+            nH = hour;
+        }
+        return new StringBuilder().append(nH).append(":").append(minute)
+                .append(" ").append(time).toString();
+
     }
 
 
