@@ -1,6 +1,7 @@
 package com.apress.gerber.ucsdbulletinboard.fragments;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -24,6 +25,12 @@ public class ArtsCultureAndMore extends Fragment {
 
 
         View mV = inflater.inflate(R.layout.fragment_artscultureandmore, container, false);
+
+        ImageView img = (ImageView) mV.findViewById(R.id.animation);
+        img.setBackgroundResource(R.drawable.animationconcert);
+        AnimationDrawable frameAnimation = (AnimationDrawable) img.getBackground();
+        frameAnimation.start();
+
 
         ImageView addPNG = (ImageView) mV.findViewById(R.id.add_new_event_png);
         addPNG.setImageResource(R.drawable.add182);
