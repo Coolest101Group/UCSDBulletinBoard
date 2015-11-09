@@ -18,6 +18,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -102,7 +103,9 @@ public class CreateEvent extends AppCompatActivity {
         // Reset errors
         eTitleView.setError(null);
         eDescView.setError(null);
+        View focusView = null;
         boolean success = false;
+        boolean abort = false;
 
         String mTitle = eTitleView.getText().toString();
         String mDesc = eDescView.getText().toString();
@@ -116,10 +119,21 @@ public class CreateEvent extends AppCompatActivity {
         String mDate = new StringBuilder().append(month)
                 .append("-").append(day).append("-").append(year)
                 .append(" ").toString();
-        if(eImage == null){
+        if(TextUtils.isEmpty(mTitle)){
+            eTitleView.setError("Required field. Enter a title.");
+            focusView = eTitleView;
+            abort = true;
+        }
+        else if(TextUtils.isEmpty(mDesc)){
+            eDescView.setError("Required field. Enter a description.");
+            focusView = eDescView;
+            abort = true;
+        }
+
+        if(eImage == null && !abort){
             success = MainActivity.mDB.postEvent(mTitle, mDate, mDesc, day, month, year, hr, min);
         }
-        else{
+        else if(!abort){
             success = MainActivity.mDB.postEvent(mTitle, mDate, mDesc, day, month, year, hr, min, eImage);
         }
         if(success){
@@ -127,7 +141,9 @@ public class CreateEvent extends AppCompatActivity {
             finish();
         }
         else{
-            Toast.makeText(getApplicationContext(), "Error.", Toast.LENGTH_LONG).show();
+            if(!abort)Toast.makeText(getApplicationContext(), "Error in DB.", Toast.LENGTH_LONG).show();
+            else focusView.requestFocus();
+
         }
         return true;
     }

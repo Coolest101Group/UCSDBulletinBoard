@@ -30,7 +30,9 @@
                 android:paddingBottom="10dp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#0feb1a" />
+                android:textColor="#0feb1a"
+                android:gravity="center"
+                android:textStyle="bold" />
             <TextView
                 android:text="@string/input_event_title"
                 android:layout_width="wrap_content"
