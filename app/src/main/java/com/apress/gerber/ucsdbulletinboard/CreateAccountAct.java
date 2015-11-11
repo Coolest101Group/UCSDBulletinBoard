@@ -1,5 +1,12 @@
 package com.apress.gerber.ucsdbulletinboard;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.annotation.TargetApi;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.os.Build;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -22,6 +29,8 @@ public class CreateAccountAct extends AppCompatActivity {
     private AutoCompleteTextView mEmailView;
     private EditText mPassword1View;
     private EditText mPassword2View;
+    private View mCreateAccView;
+    private View mProgressView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +40,8 @@ public class CreateAccountAct extends AppCompatActivity {
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         mPassword1View = (EditText) findViewById(R.id.password1);
         mPassword2View = (EditText) findViewById(R.id.password2);
+        mCreateAccView = findViewById(R.id.signup_form);
+        mProgressView = findViewById(R.id.login_progress);
 
         Button mSignupButton = (Button) findViewById(R.id.email_signup_button);
         mSignupButton.setOnClickListener(new View.OnClickListener() {
@@ -69,17 +80,18 @@ public class CreateAccountAct extends AppCompatActivity {
 
         // Check for a valid password, if the user entered one.
         if (!TextUtils.isEmpty(password1) && !isPasswordValid(password1)) {
-            mPassword1View.setError(getString(R.string.error_invalid_password));
+            mPassword1View.setError("Password must be at least 6 characters with at least 1 number");
             focusView = mPassword1View;
             cancel = true;
         }
 
+        /* if the first password check fails, don't need to check the second one right?
         // Check for a valid password, if the user entered one.
         if (!TextUtils.isEmpty(password2) && !isPasswordValid(password2)) {
             mPassword2View.setError(getString(R.string.error_invalid_password));
             focusView = mPassword2View;
             cancel = true;
-        }
+        }*/ //
 
         //check if both passwords are the same
         if ( !password1.equals(password2) ) {
@@ -94,17 +106,44 @@ public class CreateAccountAct extends AppCompatActivity {
             focusView.requestFocus();
         } else {
             // No error, do the create user thing
+            showProgress(true); //start the progress spinner stuff's happening animation
             MainActivity.databaseRef.createUser(email, password1, new Firebase.ValueResultHandler<Map<String, Object>>() {
                 @Override
                 public void onSuccess(Map<String, Object> result) {
-                    Toast.makeText(getApplicationContext(), "Account creation successful", Toast.LENGTH_LONG).show();
-                    finish();
+                    //adding account successful
+                    showProgress(false); //turn off spinner animation
+
+                    //show creation successful alert
+                    new AlertDialog.Builder(CreateAccountAct.this)
+                            .setMessage("Account Creation Successful")
+                            //when the user hits ok, close the alert and close the create account page
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                            CreateAccountAct.this.finish();
+                                        }
+                                    }
+                            )
+                            .create()
+                            .show();
                 }
 
                 @Override
                 public void onError(FirebaseError firebaseError) {
                     // there was an error
-                    Toast.makeText(getApplicationContext(), "Account already exists", Toast.LENGTH_LONG).show();
+                    showProgress(false); //turn off spinner animation
+
+                    //show error alert
+                    new AlertDialog.Builder(CreateAccountAct.this)
+                            .setMessage("Account Already Exists")
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                        }
+                                    }
+                            )
+                            .create()
+                            .show();
                 }
             });
         }
@@ -116,8 +155,8 @@ public class CreateAccountAct extends AppCompatActivity {
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 4;
+        //password has to be at least 6 characters with at least 1 number
+        return (password.length() > 5 && password.matches(".*\\d+.*"));
     }
 
     @Override
@@ -140,5 +179,38 @@ public class CreateAccountAct extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    public void showProgress(final boolean show) {
+        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
+        // for very easy animations. If available, use these APIs to fade-in
+        // the progress spinner.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+
+            mCreateAccView.setVisibility(show ? View.GONE : View.VISIBLE);
+            mCreateAccView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mCreateAccView.setVisibility(show ? View.GONE : View.VISIBLE);
+                }
+            });
+
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mProgressView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+                }
+            });
+        } else {
+            // The ViewPropertyAnimator APIs are not available, so simply show
+            // and hide the relevant UI components.
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mCreateAccView.setVisibility(show ? View.GONE : View.VISIBLE);
+        }
     }
 }

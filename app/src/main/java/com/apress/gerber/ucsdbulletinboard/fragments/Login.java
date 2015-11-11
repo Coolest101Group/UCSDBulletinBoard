@@ -3,7 +3,9 @@ package com.apress.gerber.ucsdbulletinboard.fragments;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
 import android.content.CursorLoader;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
@@ -46,10 +48,6 @@ import java.util.Map;
 public class Login extends Fragment {
     @Nullable
 
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
-    private Login.UserLoginTask mAuthTask = null;
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -102,11 +100,6 @@ public class Login extends Fragment {
         return mV;
     }
 
-    //TODO: this is where we store accounts already in the system
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
-
 
 
     /**
@@ -115,11 +108,6 @@ public class Login extends Fragment {
      * errors are presented and no actual login attempt is made.
      */
     public void attemptLogin() {
-
-
-        if (mAuthTask != null) {
-            return;
-        }
 
         // Reset errors.
         mEmailView.setError(null);
@@ -134,7 +122,7 @@ public class Login extends Fragment {
 
         // Check for a valid password, if the user entered one.
         if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
+            mPasswordView.setError("Password must be at least 6 characters with at least 1 number");
             focusView = mPasswordView;
             cancel = true;
         }
@@ -162,17 +150,41 @@ public class Login extends Fragment {
                 @Override
                 public void onAuthenticated(AuthData authData) {
                     showProgress(false); //stop progress spinner
-                    Toast.makeText(getActivity(), "Login successful", Toast.LENGTH_LONG).show(); //success message
+
+                    //show success message alert
+                    new AlertDialog.Builder(getContext())
+                            .setMessage("Login Successful")
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                            Intent intent = new Intent(getActivity(), MainActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    }
+                            )
+                            .create()
+                            .show();
+
                     //TODO: do successful login changes like updating gui with account name
-                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                    startActivity(intent);
+
                 }
 
                 @Override
                 public void onAuthenticationError(FirebaseError firebaseError) {
                     // there was an error
                     showProgress(false); //stop progress spinner
-                    Toast.makeText(getActivity(), firebaseError.getMessage(), Toast.LENGTH_LONG).show(); //error message
+
+                    //show error message alert
+                    new AlertDialog.Builder(getContext())
+                            .setMessage(firebaseError.getMessage())
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                        }
+                                    }
+                            )
+                            .create()
+                            .show();
                 }
             });
             //code from the skeleton. decide what to do with it later
@@ -187,8 +199,8 @@ public class Login extends Fragment {
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 4;
+        //password has to be at least 6 characters with at least 1 number
+        return (password.length() > 5 && password.matches(".*\\d+.*"));
     }
 
     /**
@@ -243,62 +255,5 @@ public class Login extends Fragment {
     }
 
 
-
-    /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
-
-        private final String mEmail;
-        private final String mPassword;
-
-        UserLoginTask(String email, String password) {
-            mEmail = email;
-            mPassword = password;
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-
-            try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
-
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
-
-            // TODO: register the new account here.
-            return true;
-        }
-
-        @Override
-        protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
-            showProgress(false);
-
-            if (success) {
-                //TODO: if login is successful then what?
-            } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
-            }
-        }
-
-        @Override
-        protected void onCancelled() {
-            mAuthTask = null;
-            showProgress(false);
-        }
-    }
 
 }
