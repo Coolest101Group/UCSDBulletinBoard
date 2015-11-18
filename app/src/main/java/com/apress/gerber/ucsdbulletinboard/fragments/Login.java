@@ -35,8 +35,11 @@ import com.apress.gerber.ucsdbulletinboard.LoginActivity;
 import com.apress.gerber.ucsdbulletinboard.MainActivity;
 import com.apress.gerber.ucsdbulletinboard.R;
 import com.firebase.client.AuthData;
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+import com.shaded.fasterxml.jackson.databind.ser.std.StringSerializer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +48,7 @@ import java.util.Map;
 /**
  * Created by danielmartin on 10/23/15.
  */
+
 public class Login extends Fragment {
     @Nullable
 
@@ -54,12 +58,17 @@ public class Login extends Fragment {
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private View mV;
+    public String firstName;
+    public String lastName;
+    public String email;
+    public String password;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         
-        View mV = inflater.inflate(R.layout.activity_login, container, false);
+        mV = inflater.inflate(R.layout.activity_login, container, false);
 
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) mV.findViewById(R.id.email);
@@ -114,8 +123,10 @@ public class Login extends Fragment {
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
+        email = mEmailView.getText().toString();
+        password = mPasswordView.getText().toString();
+        firstName = "";
+        lastName = "";
 
         boolean cancel = false;
         View focusView = null;
@@ -149,26 +160,53 @@ public class Login extends Fragment {
             MainActivity.databaseRef.authWithPassword(email, password, new Firebase.AuthResultHandler() {
                 @Override
                 public void onAuthenticated(AuthData authData) {
-                    showProgress(false); //stop progress spinner
+                    //login successful
+                    //retrieve first and last names from database
+                    MainActivity.databaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot snapshot) {
+                            names theNames = snapshot.child("users")
+                                    .child(email.split("@", 2)[0]) //check just the email address before @
+                                    .getValue(names.class);
 
-                    //show success message alert
-                    new AlertDialog.Builder(getContext())
-                            .setMessage("Login Successful")
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int id) {
-                                            dialog.cancel();
-                                            Intent intent = new Intent(getActivity(), MainActivity.class);
-                                            startActivity(intent);
-                                        }
-                                    }
-                            )
-                            .create()
-                            .show();
+                            firstName = theNames.getFirstName();
+                            lastName = theNames.getLastName();
 
-                    //TODO: do successful login changes like updating gui with account name
+                            //now display the name on the main ui
+                            putNamesOnMainList();
+
+                            //change state to logged in
+                            MainActivity.loggedIn = true;
+
+
+
+                           // ((MainActivity)getActivity()).switchToLoggedIn();
+
+                            showProgress(false); //stop progress spinner
+
+                            //show success message alert
+                            new AlertDialog.Builder(getContext())
+                                    .setMessage("Login Successful")
+                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+                                                    dialog.cancel();
+
+                                                    //pop back to main activity
+                                                    getFragmentManager().popBackStack();
+                                                }
+                                            }
+                                    )
+                                    .create()
+                                    .show();
+                        }
+
+                        @Override
+                        public void onCancelled(FirebaseError firebaseError) {
+                            System.out.println("The read failed: " + firebaseError.getMessage());
+                        }
+                    });
 
                 }
-
                 @Override
                 public void onAuthenticationError(FirebaseError firebaseError) {
                     // there was an error
@@ -240,8 +278,22 @@ public class Login extends Fragment {
     }
 
 
+    private static class names{
+        String firstName;
+        String lastName;
+        public names(){}
+        public void setFirstName(String firstName){this.firstName = firstName;}
+        public void setLastName(String lastName) {this.lastName = lastName;}
+        public String getFirstName(){return firstName;}
+        public String getLastName(){return lastName;}
 
+    }
 
+    public void putNamesOnMainList(){
+        System.out.println("does this run?");
+        TextView t = (TextView) getActivity().findViewById(R.id.name_mainMenu);
+        t.setText((firstName + " " + lastName).toString());
+    }
 
 
     private interface ProfileQuery {
@@ -253,7 +305,5 @@ public class Login extends Fragment {
         int ADDRESS = 0;
         int IS_PRIMARY = 1;
     }
-
-
 
 }

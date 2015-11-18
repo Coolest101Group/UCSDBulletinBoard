@@ -44,9 +44,10 @@
                 android:layout_marginLeft="5dp">
 
                 <TextView
+                    android:id="@+id/name_mainMenu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Demo Student"
+                    android:text="Not logged in"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:textColor="#fff"/>
@@ -54,7 +55,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="This is your personal bulletin board."
+                    android:text=""
                     android:textSize="16sp"
                     android:textColor="#fff"/>
             </LinearLayout>

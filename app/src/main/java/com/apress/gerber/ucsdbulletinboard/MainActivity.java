@@ -2,6 +2,7 @@ package com.apress.gerber.ucsdbulletinboard;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
@@ -18,6 +19,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TabHost;
+import android.widget.TextView;
 
 import com.apress.gerber.ucsdbulletinboard.adapter.NavListAdapter;
 import com.apress.gerber.ucsdbulletinboard.models.*;
@@ -45,6 +47,9 @@ public class MainActivity extends ActionBarActivity{
     //our database object
     public static Firebase databaseRef;
     public static manageEvents mDB;
+
+    public static boolean loggedIn = false; //logged in state
+    public static boolean firstTimeLogin = true; //this is so we don't draw the new login shit twice
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +92,7 @@ public class MainActivity extends ActionBarActivity{
         mFragmentList.add(new CommunityInvolve());
         mFragmentList.add(new WeekendEvents());
 
-        // Load Login fragemnt as default
+        // Load Event fragemnt as default
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager
                 .beginTransaction()
@@ -102,10 +107,16 @@ public class MainActivity extends ActionBarActivity{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                // replace fragment with one seleced by user
+                //this is a little hacky but lets see if it works
+               if(loggedIn && position == 1){ //position 1 should be the manage account button
+                  activitySwitcher(1);
+                }
+
+                // replace fragment with one selected by user
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 fragmentManager
                         .beginTransaction()
+                        .addToBackStack("")
                         .replace(R.id.main_content, mFragmentList.get(position))
                         .commit();
                 setTitle(mNavItemList.get(position).getTitle());
@@ -115,6 +126,34 @@ public class MainActivity extends ActionBarActivity{
             }
         });
 
+        //this gets called when you pop out of a fragment back to this main activity
+        getSupportFragmentManager().addOnBackStackChangedListener(
+                new FragmentManager.OnBackStackChangedListener() {
+                    public void onBackStackChanged() {
+
+
+                        setTitle("Featured Events");
+
+                        //first time login work. adds logout and manage account buttons
+                        if (loggedIn && firstTimeLogin) {
+                            System.out.println("This logged in IF statement is running");
+                            mNavItemList.get(0).setTitle("Logout");
+                            mNavItemList.get(0).setResIcon(R.drawable.logout);
+
+                            mNavItemList.add(1, new NavItem("Manage Account", " ", R.drawable.mng_account));
+
+
+                            NavListAdapter navListAdapter = new NavListAdapter(
+                                    getApplicationContext(), R.layout.item_nav_list, mNavItemList);
+
+                            lvNav.setAdapter(navListAdapter);
+                            firstTimeLogin = false; //now its no longer the first time
+                        }
+
+
+                    }
+                });
+
         //create listener for drawer layout
         mActionBarDrawerToggle = new ActionBarDrawerToggle(
                 this, mDrawerLayout, R.string.drawer_opened, R.string.drawer_closed){
@@ -122,6 +161,9 @@ public class MainActivity extends ActionBarActivity{
             @Override
             public void onDrawerOpened(View drawerView) {
                 // TODO Auto-generated method stub
+
+                //where i deleted that logout logic
+
                 invalidateOptionsMenu();
                 super.onDrawerOpened(drawerView);
             }
@@ -157,6 +199,8 @@ public class MainActivity extends ActionBarActivity{
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
 
+        Intent newIntent;
+
         if(mActionBarDrawerToggle.onOptionsItemSelected(item))
         {
             return true;
@@ -164,14 +208,14 @@ public class MainActivity extends ActionBarActivity{
 
         switch(item.getItemId()) {
             case R.id.create_event:
-                Intent intent = new Intent(this, CreateEvent.class);
-                this.startActivity(intent);
+                newIntent = new Intent(this, CreateEvent.class);
+                this.startActivity(newIntent);
                 break;
             case R.id.action_settings:
                 break;
             case R.id.activity_profile:
-                Intent intent2 = new Intent(this, Profile.class);
-                this.startActivity(intent2);
+                newIntent = new Intent(this, Profile.class);
+                this.startActivity(newIntent);
                 break;
             default:
                 return super.onOptionsItemSelected(item);
@@ -186,4 +230,15 @@ public class MainActivity extends ActionBarActivity{
         super.onPostCreate(savedInstanceState);
         mActionBarDrawerToggle.syncState();
     }
+
+    void activitySwitcher(int itemSelected){
+        Intent newIntent;
+        if(itemSelected == 1) {
+            newIntent = new Intent(this, Profile.class);
+            this.startActivity(newIntent);
+        }
+
+    }
+
+
 }

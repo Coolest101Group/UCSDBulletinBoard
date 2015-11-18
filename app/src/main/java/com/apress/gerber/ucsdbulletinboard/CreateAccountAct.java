@@ -26,6 +26,8 @@ import java.util.Map;
 public class CreateAccountAct extends AppCompatActivity {
 
     //ui elements
+    private EditText mFirstNameView;
+    private EditText mLastNameView;
     private AutoCompleteTextView mEmailView;
     private EditText mPassword1View;
     private EditText mPassword2View;
@@ -37,6 +39,8 @@ public class CreateAccountAct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
 
+        mFirstNameView = (EditText) findViewById(R.id.firstName);
+        mLastNameView = (EditText) findViewById(R.id.lastName);
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         mPassword1View = (EditText) findViewById(R.id.password1);
         mPassword2View = (EditText) findViewById(R.id.password2);
@@ -55,17 +59,33 @@ public class CreateAccountAct extends AppCompatActivity {
 
     public void attemptCreateAcc() {
         // Reset errors.
+        mFirstNameView.setError(null);
+        mLastNameView.setError(null);
         mEmailView.setError(null);
         mPassword1View.setError(null);
         mPassword2View.setError(null);
 
-        // Store email and password values
-        String email = mEmailView.getText().toString();
+        // Store name, email and password values
+        final String firstName = mFirstNameView.getText().toString();
+        final String lastName = mLastNameView.getText().toString();
+        final String email = mEmailView.getText().toString();
         String password1 = mPassword1View.getText().toString();
         String password2 = mPassword2View.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
+
+        //check if name fields are empty
+        if (TextUtils.isEmpty(firstName)) {
+            mFirstNameView.setError(getString(R.string.error_field_required));
+            focusView = mFirstNameView;
+            cancel = true;
+        }
+        if (TextUtils.isEmpty(lastName)) {
+            mLastNameView.setError(getString(R.string.error_field_required));
+            focusView = mLastNameView;
+            cancel = true;
+        }
 
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
@@ -111,6 +131,12 @@ public class CreateAccountAct extends AppCompatActivity {
                 @Override
                 public void onSuccess(Map<String, Object> result) {
                     //adding account successful
+
+                    //add names to new user account
+                    Firebase userRef = MainActivity.databaseRef.child("users").child(email.split("@", 2)[0]); //split email to just the stuff before @
+                    userRef.child("firstName").setValue(firstName);
+                    userRef.child("lastName").setValue(lastName);
+
                     showProgress(false); //turn off spinner animation
 
                     //show creation successful alert
