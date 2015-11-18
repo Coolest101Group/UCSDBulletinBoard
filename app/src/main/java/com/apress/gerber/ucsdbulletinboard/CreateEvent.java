@@ -19,6 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -58,6 +59,7 @@ public class CreateEvent extends AppCompatActivity {
     public static int day;
     String mCurrentPhotoPath;
     File photoFile = null;
+    Uri myURI;
 
 
     @Override
@@ -156,13 +158,22 @@ public class CreateEvent extends AppCompatActivity {
 
             try {
                 photoFile = createImageFile();
+                if(photoFile != null){
+                    Log.i("CreateEvent", "File not null");
+
+                }
+                else{
+                    Log.i("CreateEvent", "File is null");
+                }
             } catch (IOException ex) {
                 // Error occurred while creating the File
             }
             // Continue only if the File was successfully created
             if (photoFile != null) {
+                myURI = Uri.fromFile(photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
-                        Uri.fromFile(photoFile));
+                        myURI);
+                Log.i("CreateEvent", "Added extra intent to photofile");
                 startActivityForResult(takePictureIntent, CAMERA_REQUEST);
             }
         }
@@ -174,7 +185,9 @@ public class CreateEvent extends AppCompatActivity {
 
         if(resultCode == RESULT_OK){
             if (requestCode == CAMERA_REQUEST){
-                Uri imageUri = Uri.fromFile(photoFile);
+                Log.i("CreateEvent", "Getting image Uri");
+                Uri imageUri = myURI;
+                Log.i("CreateEvent", "Success, now getting inputStream");
 
                 // declare stream to read img data from SD
                 InputStream inputStream;
@@ -256,6 +269,8 @@ public class CreateEvent extends AppCompatActivity {
 
         // Save a file: path for use with ACTION_VIEW intents
         mCurrentPhotoPath = "file:" + image.getAbsolutePath();
+        Log.i("CreateEvent", "CreateEvent successful file output");
+
         return image;
     }
 
