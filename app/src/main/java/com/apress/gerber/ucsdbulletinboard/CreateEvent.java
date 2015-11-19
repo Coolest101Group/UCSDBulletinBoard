@@ -51,6 +51,12 @@ public class CreateEvent extends AppCompatActivity {
 
     public static final int CAMERA_REQUEST = 10;
     public static final int GALLERY_PICK = 20;
+    public static final int ENTERTAIN = 1;
+    public static final int EDU = 2;
+    public static final int SOCIAL = 4;
+    public static final int MISC = 8;
+    public static boolean ANIMATION = false;
+
     private EditText eTitleView;
     private EditText eDescView;
     private Bitmap eImage;
@@ -60,6 +66,7 @@ public class CreateEvent extends AppCompatActivity {
     public static int yr;
     public static int mnth;
     public static int day;
+    public static int category;
     String mCurrentPhotoPath;
     File photoFile = null;
     Uri myURI;
@@ -69,11 +76,14 @@ public class CreateEvent extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_event);
+        category = 0;
 
-        //ImageView img = (ImageView) findViewById(R.id.animation2);
-        //img.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.animationconcert));
-        //AnimationDrawable frameAnimation = (AnimationDrawable) img.getBackground();
-        //frameAnimation.start();
+        if(ANIMATION){
+            ImageView img = (ImageView) findViewById(R.id.animation2);
+            img.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.animationconcert));
+            AnimationDrawable frameAnimation = (AnimationDrawable) img.getBackground();
+            frameAnimation.start();
+        }
 
         // Get event information from create_event fragment
         eTitleView = (EditText)findViewById(R.id.event_title);
@@ -104,13 +114,13 @@ public class CreateEvent extends AppCompatActivity {
         boolean checked = ((RadioButton) view).isChecked();
 
         switch(view.getId()) {
-            case R.id.cat_entertain:
+            case R.id.cat_entertain: category = category | ENTERTAIN;
                 break;
-            case R.id.cat_edu:
+            case R.id.cat_edu: category = category | EDU;
                 break;
-            case R.id.cat_social:
+            case R.id.cat_social: category = category | SOCIAL;
                 break;
-            case R.id.cat_misc:
+            case R.id.cat_misc: category = category | MISC;
                 break;
         }
     }
@@ -151,10 +161,10 @@ public class CreateEvent extends AppCompatActivity {
         }
 
         if(eImage == null && !abort){
-            success = MainActivity.mDB.postEvent(mTitle, mDate, mDesc, day, month, year, hr, min);
+            success = MainActivity.mDB.postEvent(category, mTitle, mDate, mDesc, day, month, year, hr, min);
         }
         else if(!abort){
-            success = MainActivity.mDB.postEvent(mTitle, mDate, mDesc, day, month, year, hr, min, eImage);
+            success = MainActivity.mDB.postEvent(category, mTitle, mDate, mDesc, day, month, year, hr, min, eImage);
         }
         if(success){
             Toast.makeText(getApplicationContext(), "Event added successfully.", Toast.LENGTH_LONG).show();

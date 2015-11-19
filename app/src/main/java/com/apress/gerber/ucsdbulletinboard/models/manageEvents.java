@@ -64,7 +64,7 @@ public class manageEvents {
      *
      *  @return Returns true if the operation completed succesfully
      */
-    public boolean postEvent(String eventName, String eventTime, String eventDesc, int day,
+    public boolean postEvent(int category, String eventName, String eventTime, String eventDesc, int day,
                              int month, int year, int hour, int min){
 
         // Generate random number
@@ -72,7 +72,7 @@ public class manageEvents {
         int eventNumber = randomGenerator.nextInt();
 
         // Create new myEvent object with the info
-        myEvent event = new myEvent(eventName, eventTime, eventDesc, day, month, year, hour, min, "null");
+        myEvent event = new myEvent(category, eventName, eventTime, eventDesc, day, month, year, hour, min, "null");
 
         // Push event to db, the id of the event is the random number
         Firebase eventRef = MainActivity.databaseRef.child("events").child(String.valueOf(eventNumber));
@@ -80,7 +80,7 @@ public class manageEvents {
 
         return true;
     }
-    public boolean postEvent(String eventName, String eventTime, String eventDesc, int day,
+    public boolean postEvent(int category, String eventName, String eventTime, String eventDesc, int day,
                              int month, int year, int hour, int min, Bitmap image){
 
         // Encode image to string
@@ -94,7 +94,7 @@ public class manageEvents {
         int eventNumber = randomGenerator.nextInt();
 
         // Create new myEvent object with the info
-        myEvent event = new myEvent(eventName, eventTime, eventDesc, day, month, year, hour, min, encodedImage);
+        myEvent event = new myEvent(category, eventName, eventTime, eventDesc, day, month, year, hour, min, encodedImage);
 
         // Push event to db, the id of the event is the random number
         Firebase eventRef = MainActivity.databaseRef.child("events").child(String.valueOf(eventNumber));

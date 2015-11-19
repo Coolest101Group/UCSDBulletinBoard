@@ -19,6 +19,7 @@ public class myEvent {
     private int hour;
     private int integerDate;
     private String image;
+    private int cat;
 
     public myEvent(){}
 
@@ -30,7 +31,7 @@ public class myEvent {
         return hour;
     }
 
-    public myEvent(String mEN, String mET, String mED, int day, int month, int year, int hr, int mn, String image){
+    public myEvent(int category, String mEN, String mET, String mED, int day, int month, int year, int hr, int mn, String image){
         mEventName = mEN;
         mEventTime = mET;
         mEventDesc = mED;
@@ -40,6 +41,7 @@ public class myEvent {
         this.image = image;
         this.minute = mn;
         this.hour = hr;
+        cat = category;
 
         String tt = new StringBuilder().append(year).append(month).append(day).toString();
         integerDate = Integer.parseInt(tt);
@@ -106,6 +108,9 @@ public class myEvent {
 
     }
 
+    public int getCat(){
+        return cat;
+    }
 
 
 
