@@ -15,6 +15,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
@@ -68,7 +69,8 @@ public class CreateEvent extends AppCompatActivity {
         setContentView(R.layout.activity_create_event);
 
         ImageView img = (ImageView) findViewById(R.id.animation2);
-        img.setBackgroundResource(R.drawable.animationconcert);
+        img.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.animationconcert));
+        //img.setBackgroundResource(R.drawable.animationconcert);
         AnimationDrawable frameAnimation = (AnimationDrawable) img.getBackground();
         frameAnimation.start();
 
