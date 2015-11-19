@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.apress.gerber.ucsdbulletinboard.CreateEvent;
+import com.apress.gerber.ucsdbulletinboard.MainActivity;
 import com.apress.gerber.ucsdbulletinboard.R;
 
 /**
@@ -32,6 +33,14 @@ public class CommunityInvolve extends Fragment {
             }
         });
 
+        final Button gobackevent = (Button) mV.findViewById(R.id.backhome);
+        createEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backtohome();
+            }
+        });
+
         ImageView addPNG = (ImageView) mV.findViewById(R.id.add_new_event_png);
         addPNG.setImageResource(R.drawable.add182);
         addPNG.setOnClickListener(new View.OnClickListener() {
@@ -43,5 +52,9 @@ public class CommunityInvolve extends Fragment {
         });
 
         return mV;
+    }
+    public void backtohome(){
+        this.setContentView(R.layout.fragment_featuredevents);
+
     }
 }

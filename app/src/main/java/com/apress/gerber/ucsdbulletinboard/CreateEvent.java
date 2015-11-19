@@ -2,6 +2,7 @@ package com.apress.gerber.ucsdbulletinboard;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
@@ -272,6 +273,9 @@ public class CreateEvent extends AppCompatActivity {
         Log.i("CreateEvent", "CreateEvent successful file output");
 
         return image;
+    }
+    public void backtohome(){
+        setContentView(R.layout.fragment_featuredevents);
     }
 
 }
