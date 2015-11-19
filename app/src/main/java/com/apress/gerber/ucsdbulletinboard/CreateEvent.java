@@ -30,6 +30,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.Toast;
 import android.widget.TextView;
 
@@ -68,11 +69,10 @@ public class CreateEvent extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_event);
 
-        ImageView img = (ImageView) findViewById(R.id.animation2);
-        img.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.animationconcert));
-        //img.setBackgroundResource(R.drawable.animationconcert);
-        AnimationDrawable frameAnimation = (AnimationDrawable) img.getBackground();
-        frameAnimation.start();
+        //ImageView img = (ImageView) findViewById(R.id.animation2);
+        //img.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.animationconcert));
+        //AnimationDrawable frameAnimation = (AnimationDrawable) img.getBackground();
+        //frameAnimation.start();
 
         // Get event information from create_event fragment
         eTitleView = (EditText)findViewById(R.id.event_title);
@@ -98,8 +98,23 @@ public class CreateEvent extends AppCompatActivity {
 
     }
 
+    //Handle radio buttons here!
+    public void onRadioButtonClicked(View view) {
+        boolean checked = ((RadioButton) view).isChecked();
+
+        switch(view.getId()) {
+            case R.id.cat_entertain:
+                break;
+            case R.id.cat_edu:
+                break;
+            case R.id.cat_social:
+                break;
+            case R.id.cat_misc:
+                break;
+        }
+    }
+
     public boolean onOptionsItemSelected(MenuItem item) {
-        //finish();
         return true;
     }
 
