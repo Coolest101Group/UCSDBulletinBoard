@@ -26,7 +26,7 @@ public class FeaturedEvents extends Fragment {
 
         View mV = inflater.inflate(R.layout.fragment_featuredevents, container, false);
         addPNG = (ImageView) mV.findViewById(R.id.add_new_event_png);
-        addPNG.setImageResource(R.drawable.add182);
+        addPNG.setImageResource(R.drawable.add183);
 
         Button createEvent = (Button) mV.findViewById(R.id.create_event_page_button);
         createEvent.setOnClickListener(new View.OnClickListener() {

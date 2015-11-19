@@ -17,4 +17,10 @@
     <string name="profile_email">Email</string>
     <string name="profile_phone">Phone</string>
     <string name="profile_address">Address</string>
+    <string name="create_event_category">Choose a Category: </string>
+    <string name="category_entertainment">Entertainment </string>
+    <string name="category_educational">Educational </string>
+    <string name="category_social">Social </string>
+    <string name="category_miscellaneous">Miscellaneous </string>
+
 </resources>
