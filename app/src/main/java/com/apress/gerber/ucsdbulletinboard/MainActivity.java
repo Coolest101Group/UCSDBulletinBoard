@@ -29,6 +29,7 @@ import com.firebase.client.Firebase;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class MainActivity extends ActionBarActivity{
 
@@ -47,6 +48,8 @@ public class MainActivity extends ActionBarActivity{
     //our database object
     public static Firebase databaseRef;
     public static manageEvents mDB;
+    public static Stack<myEvent> eventStack;
+    public static ArrayList<myEvent> eventArrayList;
 
     public static boolean loggedIn = false; //logged in state
     public static boolean firstTimeLogin = true; //this is so we don't draw the new login shit twice
@@ -63,6 +66,14 @@ public class MainActivity extends ActionBarActivity{
         setContentView(R.layout.activity_main);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        // Get DB events
+        mDB.parseEvents();
+        eventStack = mDB.getEventStack();
+        eventArrayList = mDB.getMyEventArrayList();
+        FeaturedEvents nn = new FeaturedEvents();
+
+
 
 
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
@@ -85,7 +96,7 @@ public class MainActivity extends ActionBarActivity{
 
         mFragmentList = new ArrayList<Fragment>();
         mFragmentList.add(new Login());
-        mFragmentList.add(new FeaturedEvents());
+        mFragmentList.add(nn);
         mFragmentList.add(new ArtsCultureAndMore());
         mFragmentList.add(new FitnessAndWellBeing());
         mFragmentList.add(new SeminarInfoSession());
@@ -96,10 +107,10 @@ public class MainActivity extends ActionBarActivity{
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager
                 .beginTransaction()
-                .replace(R.id.main_content, mFragmentList.get(1))
+                .replace(R.id.main_content, mFragmentList.get(0))
                 .commit();
-        setTitle(mNavItemList.get(1).getTitle());
-        lvNav.setItemChecked(1, true);
+        setTitle(mNavItemList.get(0).getTitle());
+        lvNav.setItemChecked(0, true);
         mDrawerLayout.closeDrawer(mDrawerPane);
 
         // set listener for navigation items

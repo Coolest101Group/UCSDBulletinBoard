@@ -37,7 +37,7 @@ public class CommunityInvolve extends Fragment {
         createEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                backtohome();
+                //backtohome();
             }
         });
 
@@ -53,8 +53,5 @@ public class CommunityInvolve extends Fragment {
 
         return mV;
     }
-    public void backtohome(){
-        this.setContentView(R.layout.fragment_featuredevents);
 
-    }
 }

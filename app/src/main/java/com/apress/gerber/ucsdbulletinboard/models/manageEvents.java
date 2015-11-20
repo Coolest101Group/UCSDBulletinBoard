@@ -2,12 +2,14 @@ package com.apress.gerber.ucsdbulletinboard.models;
 
 import android.graphics.Bitmap;
 import android.util.Base64;
+import android.util.Log;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
 import java.util.Vector;
@@ -30,9 +32,16 @@ public class manageEvents {
     Vector<String> mEventDescription;
     Vector<String> mMasterList;
     Stack<myEvent> mEventStack;
+    ArrayList<myEvent> myEventArrayList;
 
     public manageEvents(Firebase db){
         this.db = db;
+        mEventStack = new Stack<myEvent>();
+        myEventArrayList = new ArrayList<myEvent>();
+        mEventDescription = new Vector<String>();
+        mEventNames = new Vector<String>();
+        mEventTimes = new Vector<String>();
+        mMasterList = new Vector<String>();
     }
 
     public Vector<String> getEventNames(){
@@ -112,13 +121,20 @@ public class manageEvents {
     public boolean parseEvents(){
 
         Firebase ref = MainActivity.databaseRef.child("events");
+        mEventStack = new Stack<myEvent>();
 
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
+                Log.i("CreateEvent", "There are " + dataSnapshot.getChildrenCount() + " events");
                 for (DataSnapshot eventSnapshot : dataSnapshot.getChildren()) {
+
                     myEvent singleEvent = eventSnapshot.getValue(myEvent.class);
+                    Log.i("CreateEvent", "The title is" + singleEvent.getEventName());
+                    //Log.i("CreateEvent", "The description is" + singleEvent.getEventName());
                     mEventStack.push(singleEvent);
+                    myEventArrayList.add(singleEvent);
                     mEventNames.add(singleEvent.getEventName());
                     mEventTimes.add(singleEvent.getEventTime());
                     mEventDescription.add(singleEvent.getEventDesc());
@@ -158,4 +174,5 @@ public class manageEvents {
                 .append(" ").append(time).toString();
 
     }
+    public ArrayList<myEvent> getMyEventArrayList(){return myEventArrayList;}
 }

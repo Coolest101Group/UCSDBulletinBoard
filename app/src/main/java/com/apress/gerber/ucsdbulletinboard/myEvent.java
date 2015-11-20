@@ -9,9 +9,9 @@ import android.util.Base64;
  */
 public class myEvent {
 
-    private String mEventName;
-    private String mEventTime;
-    private String mEventDesc;
+    private String eventName;
+    private String eventTime;
+    private String eventDesc;
     private int day;
     private int month;
     private int year;
@@ -32,9 +32,9 @@ public class myEvent {
     }
 
     public myEvent(int category, String mEN, String mET, String mED, int day, int month, int year, int hr, int mn, String image){
-        mEventName = mEN;
-        mEventTime = mET;
-        mEventDesc = mED;
+        eventName = mEN;
+        eventTime = mET;
+        eventDesc = mED;
         this.day = day;
         this.month = month;
         this.year = year;
@@ -48,15 +48,15 @@ public class myEvent {
     }
 
     public String getEventName() {
-        return mEventName;
+        return eventName;
     }
 
     public String getEventTime() {
-        return mEventTime;
+        return eventTime;
     }
 
     public String getEventDesc() {
-        return mEventDesc;
+        return eventDesc;
     }
 
     public int getDay() {
