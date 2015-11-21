@@ -42,8 +42,16 @@ public class myEvent {
         this.minute = mn;
         this.hour = hr;
         cat = category;
+        String tt;
 
-        String tt = new StringBuilder().append(year).append(month).append(day).toString();
+
+        if (day < 10){
+            tt = new StringBuilder().append(year).append(month).append("0").append(day).toString();
+
+
+        }else{
+            tt = new StringBuilder().append(year).append(month).append(day).toString();
+        }
         integerDate = Integer.parseInt(tt);
     }
 
@@ -82,10 +90,7 @@ public class myEvent {
         return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
     }
 
-    public Bitmap getImageBitmap(){
-        byte[] decodedByte = Base64.decode(image, 0);
-        return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
-    }
+
 
     public static String getTimeString(int hour, int minute){
         String time;

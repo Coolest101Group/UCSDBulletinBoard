@@ -73,32 +73,40 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <RadioButton
-                    android:id="@+id/cat_entertain"
-                    android:text="@string/category_entertainment"
+                    android:id="@+id/cat_arts"
+                    android:text="Arts, Culture and More"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#0539f5"
                     android:background="@drawable/apptheme_edit_text_holo_light"
                     android:onClick="onRadioButtonClicked" />
                 <RadioButton
-                    android:id="@+id/cat_edu"
-                    android:text="@string/category_educational"
+                    android:id="@+id/cat_fit"
+                    android:text="Fitness and Wellbeing"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#0539f5"
                     android:background="@drawable/apptheme_edit_text_holo_light"
                     android:onClick="onRadioButtonClicked" />
                 <RadioButton
-                    android:id="@+id/cat_social"
-                    android:text="@string/category_social"
+                    android:id="@+id/cat_info"
+                    android:text="Seminar/Info Sessions"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#0539f5"
                     android:background="@drawable/apptheme_edit_text_holo_light"
                     android:onClick="onRadioButtonClicked" />
                 <RadioButton
-                    android:id="@+id/cat_misc"
-                    android:text="@string/category_miscellaneous"
+                    android:id="@+id/cat_comm"
+                    android:text="Community Involvement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#0539f5"
+                    android:background="@drawable/apptheme_edit_text_holo_light"
+                    android:onClick="onRadioButtonClicked" />
+                <RadioButton
+                    android:id="@+id/cat_weekend"
+                    android:text="Weekend Events"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#0539f5"

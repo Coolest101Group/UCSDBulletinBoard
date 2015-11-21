@@ -92,6 +92,7 @@ public class FeaturedEvents extends Fragment {
                 getActivity().getApplicationContext(), R.layout.item_nav_list, mNavItemList);
 
 
+
         navFE.setAdapter(navListAdapter);
 
 
@@ -116,7 +117,7 @@ public class FeaturedEvents extends Fragment {
                         .replace(R.id.main_content, mFragmentList.get(position))
                         .commit();
                 //setTitle(mNavItemList.get(position).getTitle());
-                navFE.setItemChecked(position, true);
+                //navFE.setItemChecked(position, true);
 
 
 

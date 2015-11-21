@@ -51,10 +51,11 @@ public class CreateEvent extends AppCompatActivity {
 
     public static final int CAMERA_REQUEST = 10;
     public static final int GALLERY_PICK = 20;
-    public static final int ENTERTAIN = 1;
-    public static final int EDU = 2;
-    public static final int SOCIAL = 4;
-    public static final int MISC = 8;
+    public static final int ARTS = 1;
+    public static final int FIT = 2;
+    public static final int INFO = 3;
+    public static final int COMM = 4;
+    public static final int WEEKEND = 5;
     public static boolean ANIMATION = false;
 
     private EditText eTitleView;
@@ -114,13 +115,15 @@ public class CreateEvent extends AppCompatActivity {
         boolean checked = ((RadioButton) view).isChecked();
 
         switch(view.getId()) {
-            case R.id.cat_entertain: category = category | ENTERTAIN;
+            case R.id.cat_arts: category = ARTS;
                 break;
-            case R.id.cat_edu: category = category | EDU;
+            case R.id.cat_fit: category = FIT;
                 break;
-            case R.id.cat_social: category = category | SOCIAL;
+            case R.id.cat_info: category = INFO;
                 break;
-            case R.id.cat_misc: category = category | MISC;
+            case R.id.cat_comm: category = COMM;
+                break;
+            case R.id.cat_weekend: category = WEEKEND;
                 break;
         }
     }

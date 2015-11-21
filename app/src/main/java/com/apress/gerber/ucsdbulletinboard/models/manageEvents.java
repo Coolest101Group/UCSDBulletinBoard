@@ -131,7 +131,7 @@ public class manageEvents {
                 for (DataSnapshot eventSnapshot : dataSnapshot.getChildren()) {
 
                     myEvent singleEvent = eventSnapshot.getValue(myEvent.class);
-                    Log.i("CreateEvent", "The title is" + singleEvent.getEventName());
+                    Log.i("CreateEvent", "The title is "  + singleEvent.getEventName());
                     //Log.i("CreateEvent", "The description is" + singleEvent.getEventName());
                     mEventStack.push(singleEvent);
                     myEventArrayList.add(singleEvent);

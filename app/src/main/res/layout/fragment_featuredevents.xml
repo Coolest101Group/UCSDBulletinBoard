@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-              android:weightSum="1">
+    android:weightSum="1">
 
     <TextView
         android:layout_width="wrap_content"
@@ -21,9 +21,9 @@
         android:layout_height="wrap_content" />
 
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dip"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="left|bottom"
         android:orientation="vertical"
@@ -33,20 +33,24 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/nav_list_fe"
-            android:layout_below="@+id/p_box"
             android:choiceMode="singleChoice"
-            android:background="#ffffff"
-            android:layout_weight="0.95">
+            android:background="#ffffff">
 
         </ListView>
+
+
 
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal|right"
             android:id="@+id/add_new_event_png"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"/>
-    </LinearLayout>
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp" />
+    </RelativeLayout>
 
 </LinearLayout>
