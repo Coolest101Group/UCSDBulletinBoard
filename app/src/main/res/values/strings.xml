@@ -22,5 +22,9 @@
     <string name="category_educational">Educational </string>
     <string name="category_social">Social </string>
     <string name="category_miscellaneous">Miscellaneous </string>
+    <string name="ArtCat">Arts, Culture, and More </string>
+    <string name="FitnessCat">Fitness and Wellbeing</string>
+    <string name="InfoCat">Seminar/Info Session </string>
+    <string name="ComInvCat">Community Involvement </string>
 
 </resources>

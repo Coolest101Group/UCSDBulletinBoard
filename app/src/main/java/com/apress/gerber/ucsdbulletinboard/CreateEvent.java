@@ -32,6 +32,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.CheckBox;
 import android.widget.Toast;
 import android.widget.TextView;
 
@@ -51,10 +52,10 @@ public class CreateEvent extends AppCompatActivity {
 
     public static final int CAMERA_REQUEST = 10;
     public static final int GALLERY_PICK = 20;
-    public static final int ENTERTAIN = 1;
-    public static final int EDU = 2;
-    public static final int SOCIAL = 4;
-    public static final int MISC = 8;
+    public static final int ART = 1;
+    public static final int FITNESS = 2;
+    public static final int INFO = 4;
+    public static final int COMINV = 8;
     public static boolean ANIMATION = false;
 
     private EditText eTitleView;
@@ -110,17 +111,33 @@ public class CreateEvent extends AppCompatActivity {
     }
 
     //Handle radio buttons here!
-    public void onRadioButtonClicked(View view) {
-        boolean checked = ((RadioButton) view).isChecked();
+    public void onCheckboxClicked(View view) {
+        boolean checked = ((CheckBox) view).isChecked();
 
         switch(view.getId()) {
-            case R.id.cat_entertain: category = category | ENTERTAIN;
+            case R.id.cat_art:
+                if(checked) // set art bit
+                    category = category | ART;
+                else // clear art bit
+                    category &= ~(1 << 0);
                 break;
-            case R.id.cat_edu: category = category | EDU;
+            case R.id.cat_fitness:
+                if(checked) //set fitness bit
+                    category = category | FITNESS;
+                else // clear fitness bit
+                    category &= ~(1 << 1);
                 break;
-            case R.id.cat_social: category = category | SOCIAL;
+            case R.id.cat_info:
+                if(checked) // set info bit
+                    category = category | INFO;
+                else // clear info bit
+                    category &= ~(1 << 2);
                 break;
-            case R.id.cat_misc: category = category | MISC;
+            case R.id.cat_cominv:
+                if(checked) // set cominv bit
+                    category = category | COMINV;
+                else // clear cominv bit
+                    category &= ~(1 << 3);
                 break;
         }
     }

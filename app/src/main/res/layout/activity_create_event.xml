@@ -67,7 +67,7 @@
                 android:textStyle="bold"
                 android:textSize="18dp"
                 android:textColor="#FF0FEB1A" />
-
+            <!--
             <RadioGroup
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -104,8 +104,35 @@
                     android:textColor="#0539f5"
                     android:background="@drawable/apptheme_edit_text_holo_light"
                     android:onClick="onRadioButtonClicked" />
-            </RadioGroup>
-
+            </RadioGroup> -->
+            <CheckBox android:id="@+id/cat_art"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ArtCat"
+                android:textColor="#0539f5"
+                android:background="@drawable/apptheme_edit_text_holo_light"
+                android:onClick="onCheckboxClicked"/>
+            <CheckBox android:id="@+id/cat_fitness"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/FitnessCat"
+                android:textColor="#0539f5"
+                android:background="@drawable/apptheme_edit_text_holo_light"
+                android:onClick="onCheckboxClicked"/>
+            <CheckBox android:id="@+id/cat_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/InfoCat"
+                android:textColor="#0539f5"
+                android:background="@drawable/apptheme_edit_text_holo_light"
+                android:onClick="onCheckboxClicked"/>
+            <CheckBox android:id="@+id/cat_cominv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ComInvCat"
+                android:textColor="#0539f5"
+                android:background="@drawable/apptheme_edit_text_holo_light"
+                android:onClick="onCheckboxClicked"/>
 
             <TextView
                 android:text="Time of Event:"
