@@ -41,7 +41,7 @@ public class ArtsCultureAndMore extends Fragment {
                 startActivity(intent);
             }
         });
-
+        /*
         Button createEvent = (Button) mV.findViewById(R.id.create_event_page_button);
         createEvent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,7 +49,7 @@ public class ArtsCultureAndMore extends Fragment {
                 Intent intent = new Intent(getActivity(), CreateEvent.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
         return mV;
     }

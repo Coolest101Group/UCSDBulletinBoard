@@ -23,7 +23,7 @@ public class CommunityInvolve extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View mV = inflater.inflate(R.layout.fragment_communityinvolve, container, false);
-
+        /*
         Button createEvent = (Button) mV.findViewById(R.id.create_event_page_button);
         createEvent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,15 +31,15 @@ public class CommunityInvolve extends Fragment {
                 Intent intent = new Intent(getActivity(), CreateEvent.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
         final Button gobackevent = (Button) mV.findViewById(R.id.backhome);
-        createEvent.setOnClickListener(new View.OnClickListener() {
+        /*createEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //backtohome();
             }
-        });
+        });*/
 
         ImageView addPNG = (ImageView) mV.findViewById(R.id.add_new_event_png);
         addPNG.setImageResource(R.drawable.add182);
