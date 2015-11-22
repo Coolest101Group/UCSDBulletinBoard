@@ -133,6 +133,13 @@
                 android:textColor="#0539f5"
                 android:background="@drawable/apptheme_edit_text_holo_light"
                 android:onClick="onCheckboxClicked"/>
+            <CheckBox android:id="@+id/cat_weekend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/WeekendCat"
+                android:textColor="#0539f5"
+                android:background="@drawable/apptheme_edit_text_holo_light"
+                android:onClick="onCheckboxClicked"/>
 
             <TextView
                 android:text="Time of Event:"

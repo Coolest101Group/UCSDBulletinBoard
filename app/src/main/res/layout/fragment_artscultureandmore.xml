@@ -18,13 +18,13 @@
         android:textColor="#000000"
         android:textStyle="bold"
         android:id="@+id/textView"/>
-
+    <!--
     <Button
         android:id="@+id/create_event_page_button"
         android:text="@string/create_new_event"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
-
+        -->
 
         <ImageView
             android:layout_width="50dp"

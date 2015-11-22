@@ -13,11 +13,11 @@
         android:textStyle="bold"
         android:id="@+id/textView"/>
 
-    <Button
+    <!--<Button
         android:id="@+id/create_event_page_button"
         android:text="@string/create_new_event"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content" />-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dip"

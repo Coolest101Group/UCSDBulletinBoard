@@ -33,7 +33,6 @@ public class CommunityInvolve extends Fragment {
             }
         });*/
 
-        final Button gobackevent = (Button) mV.findViewById(R.id.backhome);
         /*createEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -56,6 +56,7 @@ public class CreateEvent extends AppCompatActivity {
     public static final int FITNESS = 2;
     public static final int INFO = 4;
     public static final int COMINV = 8;
+    public static final int WEEKEND = 16;
     public static boolean ANIMATION = false;
 
     private EditText eTitleView;
@@ -138,6 +139,12 @@ public class CreateEvent extends AppCompatActivity {
                     category = category | COMINV;
                 else // clear cominv bit
                     category &= ~(1 << 3);
+                break;
+            case R.id.cat_weekend:
+                if(checked) // set week bit
+                    category = category | WEEKEND;
+                else // clear week bit
+                    category &= ~(1 << 4);
                 break;
         }
     }
