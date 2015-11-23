@@ -50,7 +50,7 @@
                     android:text="Not logged in"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:textColor="#fff"/>
+                    android:textColor="#fff" />
 
                 <TextView
                     android:layout_width="wrap_content"
