@@ -148,53 +148,7 @@
             android:onClick="onCheckboxClicked"
             android:checked="false" />
 
-<<<<<<< HEAD
-            <RadioGroup
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <RadioButton
-                    android:id="@+id/cat_arts"
-                    android:text="Arts, Culture and More"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#0539f5"
-                    android:background="@drawable/apptheme_edit_text_holo_light"
-                    android:onClick="onRadioButtonClicked" />
-                <RadioButton
-                    android:id="@+id/cat_fit"
-                    android:text="Fitness and Wellbeing"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#0539f5"
-                    android:background="@drawable/apptheme_edit_text_holo_light"
-                    android:onClick="onRadioButtonClicked" />
-                <RadioButton
-                    android:id="@+id/cat_info"
-                    android:text="Seminar/Info Sessions"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#0539f5"
-                    android:background="@drawable/apptheme_edit_text_holo_light"
-                    android:onClick="onRadioButtonClicked" />
-                <RadioButton
-                    android:id="@+id/cat_comm"
-                    android:text="Community Involvement"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#0539f5"
-                    android:background="@drawable/apptheme_edit_text_holo_light"
-                    android:onClick="onRadioButtonClicked" />
-                <RadioButton
-                    android:id="@+id/cat_weekend"
-                    android:text="Weekend Events"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#0539f5"
-                    android:background="@drawable/apptheme_edit_text_holo_light"
-                    android:onClick="onRadioButtonClicked" />
-            </RadioGroup>
-=======
+
         <TextView
             android:text="Time of Event:"
             android:layout_width="wrap_content"
@@ -219,7 +173,6 @@
             android:textStyle="bold"
             android:textSize="16dp"
             android:textColor="#000000" />
->>>>>>> fd0100838679ade405cf7b1841c874adebf724a5
 
         <Button
             android:layout_width="wrap_content"

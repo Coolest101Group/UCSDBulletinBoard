@@ -8,12 +8,9 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
-        android:text="Fitness and Wellbeing"
-=======
+
         android:text="Fiteness and WellBeing"
         android:gravity="center"
->>>>>>> fd0100838679ade405cf7b1841c874adebf724a5
         android:textSize="20sp"
         android:textColor="#000000"
         android:background="@color/event_color"
@@ -24,15 +21,9 @@
         android:id="@+id/create_event_page_button"
         android:text="@string/create_new_event"
         android:layout_width="fill_parent"
-<<<<<<< HEAD
-        android:layout_height="wrap_content" />
 
-
-    <RelativeLayout
-=======
         android:layout_height="wrap_content" /> -->
-    <LinearLayout
->>>>>>> fd0100838679ade405cf7b1841c874adebf724a5
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1"

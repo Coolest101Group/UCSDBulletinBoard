@@ -20,12 +20,7 @@
         android:id="@+id/create_event_page_button"
         android:text="@string/create_new_event"
         android:layout_width="fill_parent"
-<<<<<<< HEAD
-        android:layout_height="wrap_content" />
 
-
-    <RelativeLayout
-=======
         android:layout_height="wrap_content" /> -->
     <!--<Button
         android:id="@+id/backhome"
@@ -33,8 +28,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
          />-->
-    <LinearLayout
->>>>>>> fd0100838679ade405cf7b1841c874adebf724a5
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1"
@@ -46,7 +40,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/nav_list_fe"
-            android:layout_below="@+id/p_box"
             android:choiceMode="singleChoice"
             android:background="#ffffff">
 

@@ -40,31 +40,9 @@ public class CommunityInvolve extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View mV = inflater.inflate(R.layout.fragment_communityinvolve, container, false);
-<<<<<<< HEAD
         navFE = (ListView) mV.findViewById(R.id.nav_list_fe);
 
-=======
-        /*
->>>>>>> fd0100838679ade405cf7b1841c874adebf724a5
-        Button createEvent = (Button) mV.findViewById(R.id.create_event_page_button);
-        createEvent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), CreateEvent.class);
-                startActivity(intent);
-            }
-        });*/
 
-<<<<<<< HEAD
-
-=======
-        /*createEvent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //backtohome();
-            }
-        });*/
->>>>>>> fd0100838679ade405cf7b1841c874adebf724a5
 
         ImageView addPNG = (ImageView) mV.findViewById(R.id.add_new_event_png);
         addPNG.setImageResource(R.drawable.add182);

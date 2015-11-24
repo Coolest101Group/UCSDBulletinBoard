@@ -2,10 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-<<<<<<< HEAD
-    android:orientation="vertical"
-    android:weightSum="1">
-=======
+
     android:orientation="vertical">
 
     <ImageView
@@ -13,7 +10,6 @@
         android:layout_height="match_parent"
 
         android:id="@+id/animation"/>
->>>>>>> fd0100838679ade405cf7b1841c874adebf724a5
 
     <TextView
         android:layout_width="fill_parent"

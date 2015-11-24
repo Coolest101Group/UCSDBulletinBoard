@@ -52,19 +52,12 @@ public class CreateEvent extends AppCompatActivity {
 
     public static final int CAMERA_REQUEST = 10;
     public static final int GALLERY_PICK = 20;
-<<<<<<< HEAD
-    public static final int ARTS = 1;
-    public static final int FIT = 2;
-    public static final int INFO = 3;
-    public static final int COMM = 4;
-    public static final int WEEKEND = 5;
-=======
+
     public static final int ART = 1;
     public static final int FITNESS = 2;
     public static final int INFO = 4;
     public static final int COMINV = 8;
     public static final int WEEKEND = 16;
->>>>>>> fd0100838679ade405cf7b1841c874adebf724a5
     public static boolean ANIMATION = false;
 
     private EditText eTitleView;
@@ -124,17 +117,7 @@ public class CreateEvent extends AppCompatActivity {
         boolean checked = ((CheckBox) view).isChecked();
 
         switch(view.getId()) {
-<<<<<<< HEAD
-            case R.id.cat_arts: category = ARTS;
-                break;
-            case R.id.cat_fit: category = FIT;
-                break;
-            case R.id.cat_info: category = INFO;
-                break;
-            case R.id.cat_comm: category = COMM;
-                break;
-            case R.id.cat_weekend: category = WEEKEND;
-=======
+
             case R.id.cat_art:
                 if(checked) // set art bit
                     category = category | ART;
@@ -164,7 +147,6 @@ public class CreateEvent extends AppCompatActivity {
                     category = category | WEEKEND;
                 else // clear week bit
                     category &= ~(1 << 4);
->>>>>>> fd0100838679ade405cf7b1841c874adebf724a5
                 break;
         }
     }
