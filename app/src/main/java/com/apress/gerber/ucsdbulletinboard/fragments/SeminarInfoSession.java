@@ -42,14 +42,14 @@ public class SeminarInfoSession extends Fragment {
         View mV = inflater.inflate(R.layout.fragment_seminarinfosession, container, false);
         navFE = (ListView) mV.findViewById(R.id.nav_list_fe);
 
-        Button createEvent = (Button) mV.findViewById(R.id.create_event_page_button);
+        /*Button createEvent = (Button) mV.findViewById(R.id.create_event_page_button);
         createEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), CreateEvent.class);
                 startActivity(intent);
             }
-        });
+        });*/
         ImageView addPNG = (ImageView) mV.findViewById(R.id.add_new_event_png);
         addPNG.setImageResource(R.drawable.add182);
         addPNG.setOnClickListener(new View.OnClickListener() {

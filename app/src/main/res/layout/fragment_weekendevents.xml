@@ -1,27 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="1">
+=======
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+>>>>>>> fd0100838679ade405cf7b1841c874adebf724a5
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Weekend Events"
+        android:gravity="center"
         android:textSize="20sp"
         android:textColor="#000000"
+        android:background="@color/event_color"
         android:textStyle="bold"
         android:id="@+id/textView"/>
 
-    <Button
+    <!--<Button
         android:id="@+id/create_event_page_button"
         android:text="@string/create_new_event"
         android:layout_width="fill_parent"
+<<<<<<< HEAD
         android:layout_height="wrap_content" />
 
 
     <RelativeLayout
+=======
+        android:layout_height="wrap_content" /> -->
+    <LinearLayout
+>>>>>>> fd0100838679ade405cf7b1841c874adebf724a5
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1"

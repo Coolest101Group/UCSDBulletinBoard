@@ -2,24 +2,38 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+<<<<<<< HEAD
     android:orientation="vertical"
     android:weightSum="1">
+=======
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:id="@+id/animation"/>
+>>>>>>> fd0100838679ade405cf7b1841c874adebf724a5
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Arts, Culture and More"
+        android:gravity="center"
         android:textSize="20sp"
         android:textColor="#000000"
+        android:background="@color/event_color"
         android:textStyle="bold"
-        android:id="@+id/textView"/>
-
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+    <!--
     <Button
         android:id="@+id/create_event_page_button"
         android:text="@string/create_new_event"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
-
+        -->
 
     <RelativeLayout
         android:layout_width="match_parent"

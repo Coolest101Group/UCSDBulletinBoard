@@ -48,7 +48,7 @@ public class FeaturedEvents extends Fragment {
 
 
 
-
+        /*
         Button createEvent = (Button) mV.findViewById(R.id.create_event_page_button);
         createEvent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +56,7 @@ public class FeaturedEvents extends Fragment {
                 Intent intent = new Intent(getActivity(), CreateEvent.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
         addPNG.setOnClickListener(new View.OnClickListener() {
             @Override

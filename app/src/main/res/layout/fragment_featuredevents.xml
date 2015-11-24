@@ -6,19 +6,21 @@
     android:weightSum="1">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Featured Events"
+        android:gravity="center"
         android:textSize="20sp"
         android:textColor="#000000"
+        android:background="@color/event_color"
         android:textStyle="bold"
         android:id="@+id/textView"/>
 
-    <Button
+    <!--<Button
         android:id="@+id/create_event_page_button"
         android:text="@string/create_new_event"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content" /> -->
 
 
     <RelativeLayout

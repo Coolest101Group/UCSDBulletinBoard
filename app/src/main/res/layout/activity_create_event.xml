@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.apress.gerber.ucsdbulletinboard.CreateEvent"
-    android:background="#000000">
+    tools:context="com.apress.gerber.ucsdbulletinboard.CreateEvent">
 
     <ImageView
         android:layout_width="match_parent"
@@ -19,55 +19,136 @@
     </android.support.v7.widget.Toolbar>
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
+        android:layout_height="wrap_content"></ScrollView>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:orientation="vertical">
+        <TextView
+            android:text="@string/create_event_title"
+            android:textSize="20dp"
+            android:paddingBottom="10dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:background="@color/event_color"/>
+        <TextView
+            android:text="@string/input_event_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:textColor="#000000" />
+        <EditText
+            android:id="@+id/event_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#000000" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"></FrameLayout>
+
+        <TextView
+            android:text="@string/input_event_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:textColor="#000000" />
+        <EditText
+            android:id="@+id/event_description"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#000000" />
+        <TextView
+            android:text="@string/create_event_category"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:textColor="#000000" />
+        <!--
+        <RadioGroup
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <TextView
-                android:text="@string/create_event_title"
-                android:textSize="30dp"
-                android:paddingBottom="10dp"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#0feb1a"
-                android:gravity="center"
-                android:textStyle="bold" />
-            <TextView
-                android:text="@string/input_event_title"
+            <RadioButton
+                android:id="@+id/cat_entertain"
+                android:text="@string/category_entertainment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="18dp"
-                android:textColor="#FF0FEB1A" />
-            <EditText
-                android:id="@+id/event_title"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
                 android:textColor="#0539f5"
-                android:background="@drawable/apptheme_edit_text_holo_light" />
-
-            <TextView
-                android:text="@string/input_event_description"
+                android:background="@drawable/apptheme_edit_text_holo_light"
+                android:onClick="onRadioButtonClicked" />
+            <RadioButton
+                android:id="@+id/cat_edu"
+                android:text="@string/category_educational"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="18dp"
-                android:textColor="#FF0FEB1A" />
-            <EditText
-                android:id="@+id/event_description"
-                android:layout_width="fill_parent"
+                android:textColor="#0539f5"
+                android:background="@drawable/apptheme_edit_text_holo_light"
+                android:onClick="onRadioButtonClicked" />
+            <RadioButton
+                android:id="@+id/cat_social"
+                android:text="@string/category_social"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#0539f5"
-                android:background="@drawable/apptheme_edit_text_holo_light" />
-            <TextView
-                android:text="@string/create_event_category"
-                android:layout_width="fill_parent"
+                android:background="@drawable/apptheme_edit_text_holo_light"
+                android:onClick="onRadioButtonClicked" />
+            <RadioButton
+                android:id="@+id/cat_misc"
+                android:text="@string/category_miscellaneous"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="18dp"
-                android:textColor="#FF0FEB1A" />
+                android:textColor="#0539f5"
+                android:background="@drawable/apptheme_edit_text_holo_light"
+                android:onClick="onRadioButtonClicked" />
+        </RadioGroup> -->
+        <CheckBox android:id="@+id/cat_art"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ArtCat"
+            android:textColor="#000000"
+            android:onClick="onCheckboxClicked"
+            android:checked="false" />
+        <CheckBox android:id="@+id/cat_fitness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/FitnessCat"
+            android:textColor="#000000"
+            android:onClick="onCheckboxClicked"
+            android:checked="false" />
+        <CheckBox android:id="@+id/cat_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/InfoCat"
+            android:textColor="#000000"
+            android:onClick="onCheckboxClicked"/>
+        <CheckBox android:id="@+id/cat_cominv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ComInvCat"
+            android:textColor="#000000"
+            android:onClick="onCheckboxClicked"
+            android:checked="false" />
+        <CheckBox android:id="@+id/cat_weekend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/WeekendCat"
+            android:textColor="#000000"
+            android:onClick="onCheckboxClicked"
+            android:checked="false" />
 
+<<<<<<< HEAD
             <RadioGroup
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -113,76 +194,75 @@
                     android:background="@drawable/apptheme_edit_text_holo_light"
                     android:onClick="onRadioButtonClicked" />
             </RadioGroup>
+=======
+        <TextView
+            android:text="Time of Event:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:textColor="#000000" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pick_date"
+            android:onClick="showDatePickerDialog" />
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textColor="#000000" />
+        <TextView
+            android:text="Day of Event:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:textColor="#000000" />
+>>>>>>> fd0100838679ade405cf7b1841c874adebf724a5
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pick_time"
+            android:onClick="showTimePickerDialog" />
+        <TextView
+            android:id="@+id/tv"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textColor="#000000" />
 
 
-            <TextView
-                android:text="Time of Event:"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="18dp"
-                android:textColor="#FF0FEB1A" />
+        <LinearLayout
+            android:id="@+id/LinearLayout02"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_alignParentBottom="true">
             <Button
+                android:id="@+id/select_from_camera"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/pick_date"
-                android:onClick="showDatePickerDialog" />
-            <TextView
-                android:id="@+id/tv2"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:textColor="#FF0FEB1A" />
-            <TextView
-                android:text="Day of Event:"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="18dp"
-                android:textColor="#FF0FEB1A" />
-
+                android:layout_weight="1" android:text="Take New Photo">
+            </Button>
             <Button
+                android:id="@+id/select_from_gallery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/pick_time"
-                android:onClick="showTimePickerDialog" />
-            <TextView
-                android:id="@+id/tv"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:textColor="#FF0FEB1A" />
-
-
-            <LinearLayout
-                android:id="@+id/LinearLayout02"
-                android:layout_height="wrap_content"
-                android:layout_width="fill_parent"
-                android:layout_alignParentBottom="true">
-                <Button
-                    android:id="@+id/select_from_camera"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" android:text="Take New Photo">
-                </Button>
-                <Button
-                    android:id="@+id/select_from_gallery"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Open Existing Image"
-                    android:onClick="btnGetGalleryClicked"
-                    android:nestedScrollingEnabled="true">
-                </Button>
-            </LinearLayout>
-            <ImageView
-                android:id="@+id/iViewPhoto"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-            <Button
-                android:id="@+id/event_sign_up_button"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/submit_event_button"/>
+                android:layout_weight="1"
+                android:text="Open Existing Image"
+                android:onClick="btnGetGalleryClicked"
+                android:nestedScrollingEnabled="true">
+            </Button>
         </LinearLayout>
-    </ScrollView>
+        <ImageView
+            android:id="@+id/iViewPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <Button
+            android:id="@+id/event_sign_up_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/submit_event_button"/>
+    </LinearLayout>
 
 </RelativeLayout>
