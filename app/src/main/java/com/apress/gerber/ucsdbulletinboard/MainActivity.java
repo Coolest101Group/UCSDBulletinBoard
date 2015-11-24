@@ -97,11 +97,38 @@ public class MainActivity extends ActionBarActivity{
         mFragmentList = new ArrayList<Fragment>();
         mFragmentList.add(new Login());
         mFragmentList.add(nn);
-        mFragmentList.add(new ArtsCultureAndMore());
-        mFragmentList.add(new FitnessAndWellBeing());
-        mFragmentList.add(new SeminarInfoSession());
-        mFragmentList.add(new CommunityInvolve());
-        mFragmentList.add(new WeekendEvents());
+        //mFragmentList.add(new ArtsCultureAndMore());
+        //mFragmentList.add(new FitnessAndWellBeing());
+        //mFragmentList.add(new SeminarInfoSession());
+        //mFragmentList.add(new CommunityInvolve());
+        //mFragmentList.add(new WeekendEvents());
+
+        /////// TEST CODE //////
+        GenericFragment arts = new GenericFragment();
+        Bundle bundle_art = new Bundle();
+        bundle_art.putInt("cat", CreateEvent.ART);
+        mFragmentList.add(arts);
+
+        GenericFragment fitness = new GenericFragment();
+        Bundle bundle_fit = new Bundle();
+        bundle_fit.putInt("cat", CreateEvent.FITNESS);
+        mFragmentList.add(fitness);
+
+        GenericFragment sem = new GenericFragment();
+        Bundle bundle_sem = new Bundle();
+        bundle_sem.putInt("cat", CreateEvent.INFO);
+        mFragmentList.add(sem);
+
+        GenericFragment com = new GenericFragment();
+        Bundle bundle_com = new Bundle();
+        bundle_com.putInt("cat", CreateEvent.COMINV);
+        mFragmentList.add(com);
+
+        GenericFragment wk = new GenericFragment();
+        Bundle bundle_wk = new Bundle();
+        bundle_wk.putInt("cat", CreateEvent.WEEKEND);
+        mFragmentList.add(wk);
+        ///////////////////////
 
         // Load Event fragemnt as default
         FragmentManager fragmentManager = getSupportFragmentManager();

@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.apress.gerber.ucsdbulletinboard.CreateEvent;
 import com.apress.gerber.ucsdbulletinboard.MainActivity;
@@ -26,21 +27,29 @@ import java.util.List;
 /**
  * Created by danielmartin on 10/23/15.
  */
-public class CommunityInvolve extends Fragment {
+public class GenericFragment extends Fragment {
     public static final int ART = 1;
     public static final int FITNESS = 2;
     public static final int INFO = 4;
     public static final int COMINV = 8;
     public static final int WEEKEND = 16;
+    public static int THIS_FRAGMENT_CATEGORY;
     public static ListView navFE;
     public static List<NavItem> mNavItemList;
     public static List<Fragment> mFragmentList;
+    TextView tt;
+    View mV;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View mV = inflater.inflate(R.layout.fragment_communityinvolve, container, false);
+        mV = inflater.inflate(R.layout.fragment_communityinvolve, container, false);
         navFE = (ListView) mV.findViewById(R.id.nav_list_fe);
+        Bundle args = getArguments();
+        THIS_FRAGMENT_CATEGORY = args.getInt("cat");
+
+        tt = (TextView) mV.findViewById(R.id.textViewGeneric);
+        tt.setText(catString());
 
 
 
@@ -68,7 +77,7 @@ public class CommunityInvolve extends Fragment {
 
         for (int i = 0; i < eventArrayList.size(); i++){
             tmpEvent = eventArrayList.get(i);
-            if(CreateEvent.getIndividualEventCategory(tmpEvent) == COMINV){
+            if(CreateEvent.getIndividualEventCategory(tmpEvent) == THIS_FRAGMENT_CATEGORY){
                 String time = tmpEvent.getEventTime() + " at " + tmpEvent.getHour() + ":" + tmpEvent.getMinute();
                 mNavItemList.add(new NavItem(tmpEvent.getEventName(), time, R.drawable.event8));
             }
@@ -84,7 +93,7 @@ public class CommunityInvolve extends Fragment {
         mFragmentList = new ArrayList<Fragment>();
         for(int i = 0; i < eventArrayList.size(); i++){
             tmpEvent = eventArrayList.get(i);
-            if(CreateEvent.getIndividualEventCategory(tmpEvent) == COMINV){
+            if(CreateEvent.getIndividualEventCategory(tmpEvent) == THIS_FRAGMENT_CATEGORY){
                 Bundle bundle = new Bundle();
                 bundle.putInt("idEvent", i);
                 Fragment newF = new EventInfo();
@@ -111,6 +120,33 @@ public class CommunityInvolve extends Fragment {
         });
 
         navListAdapter.notifyDataSetChanged();
+    }
+
+    public String catString(){
+        String ss = "";
+
+        switch (THIS_FRAGMENT_CATEGORY){
+            case ART:
+                ss = "Arts, Culture and More";
+                break;
+
+            case FITNESS:
+                ss = "Fitness and Wellbeing";
+                break;
+
+            case INFO:
+                ss = "Seminar/Info Sessions";
+                break;
+
+            case COMINV:
+                ss = "Community Involvement";
+                break;
+
+            case WEEKEND:
+                ss = "Weekend Events";
+                break;
+        }
+        return ss;
     }
 
 

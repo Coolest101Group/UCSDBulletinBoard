@@ -331,4 +331,16 @@ public class CreateEvent extends AppCompatActivity {
         setContentView(R.layout.fragment_featuredevents);
     }
 
+    /*
+     *  Method that takes an event and retrieves its unmasked
+     *  category
+     */
+    public static int getIndividualEventCategory(myEvent event){
+        int category = event.getCat();
+
+        // TODO: Get unmasked category
+
+        return category;
+    }
+
 }

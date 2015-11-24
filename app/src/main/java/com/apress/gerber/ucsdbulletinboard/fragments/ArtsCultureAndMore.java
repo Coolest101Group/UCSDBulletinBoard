@@ -29,11 +29,11 @@ import java.util.List;
  * Created by danielmartin on 10/23/15.
  */
 public class ArtsCultureAndMore extends Fragment {
-    public static final int ARTS = 1;
-    public static final int FIT = 2;
-    public static final int INFO = 3;
-    public static final int COMM = 4;
-    public static final int WEEKEND = 5;
+    public static final int ART = 1;
+    public static final int FITNESS = 2;
+    public static final int INFO = 4;
+    public static final int COMINV = 8;
+    public static final int WEEKEND = 16;
     public static ListView navFE;
     public static List<NavItem> mNavItemList;
     public static List<Fragment> mFragmentList;
@@ -48,12 +48,6 @@ public class ArtsCultureAndMore extends Fragment {
         navFE = (ListView) mV.findViewById(R.id.nav_list_fe);
         if(navFE == null) Log.i(ce, "navFE is null");
 
-        //ImageView img = (ImageView) mV.findViewById(R.id.animation);
-        //img.setBackgroundResource(R.drawable.animationconcert);
-        //AnimationDrawable frameAnimation = (AnimationDrawable) img.getBackground();
-        //frameAnimation.start();
-
-
         ImageView addPNG = (ImageView) mV.findViewById(R.id.add_new_event_png);
         addPNG.setImageResource(R.drawable.add182);
         addPNG.setOnClickListener(new View.OnClickListener() {
@@ -63,6 +57,7 @@ public class ArtsCultureAndMore extends Fragment {
                 startActivity(intent);
             }
         });
+        populateList();
 
 
 
@@ -80,7 +75,7 @@ public class ArtsCultureAndMore extends Fragment {
         for (int i = 0; i < eventArrayList.size(); i++){
             tmpEvent = eventArrayList.get(i);
             Log.i("CreateEvent", "master array NOT EMPTY");
-            if(tmpEvent.getCat() == ARTS){
+            if(CreateEvent.getIndividualEventCategory(tmpEvent) == ART){
                 String time = tmpEvent.getEventTime() + " at " + tmpEvent.getHour() + ":" + tmpEvent.getMinute();
                 mNavItemList.add(new NavItem(tmpEvent.getEventName(), time, R.drawable.event8));
                 Log.i("CreateEvent", "Arts array NOT EMPTY");
@@ -100,7 +95,8 @@ public class ArtsCultureAndMore extends Fragment {
         mFragmentList = new ArrayList<Fragment>();
         for(int i = 0; i < eventArrayList.size(); i++){
             tmpEvent = eventArrayList.get(i);
-            if(tmpEvent.getCat() == ARTS){
+
+            if(CreateEvent.getIndividualEventCategory(tmpEvent) == ART){
                 Bundle bundle = new Bundle();
                 bundle.putInt("idEvent", i);
                 Fragment newF = new EventInfo();

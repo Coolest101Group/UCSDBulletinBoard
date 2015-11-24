@@ -28,11 +28,11 @@ import java.util.List;
  * Created by danielmartin on 10/23/15.
  */
 public class FitnessAndWellBeing extends Fragment {
-    public static final int ARTS = 1;
-    public static final int FIT = 2;
-    public static final int INFO = 3;
-    public static final int COMM = 4;
-    public static final int WEEKEND = 5;
+    public static final int ART = 1;
+    public static final int FITNESS = 2;
+    public static final int INFO = 4;
+    public static final int COMINV = 8;
+    public static final int WEEKEND = 16;
     public static ListView navFE;
     public static List<NavItem> mNavItemList;
     public static List<Fragment> mFragmentList;
@@ -74,7 +74,7 @@ public class FitnessAndWellBeing extends Fragment {
 
         for (int i = 0; i < eventArrayList.size(); i++){
             tmpEvent = eventArrayList.get(i);
-            if(tmpEvent.getCat() == FIT){
+            if(CreateEvent.getIndividualEventCategory(tmpEvent) == FITNESS){
                 String time = tmpEvent.getEventTime() + " at " + tmpEvent.getHour() + ":" + tmpEvent.getMinute();
                 mNavItemList.add(new NavItem(tmpEvent.getEventName(), time, R.drawable.event8));
             }
@@ -90,7 +90,7 @@ public class FitnessAndWellBeing extends Fragment {
         mFragmentList = new ArrayList<Fragment>();
         for(int i = 0; i < eventArrayList.size(); i++){
             tmpEvent = eventArrayList.get(i);
-            if(tmpEvent.getCat() == FIT){
+            if(CreateEvent.getIndividualEventCategory(tmpEvent) == FITNESS){
                 Bundle bundle = new Bundle();
                 bundle.putInt("idEvent", i);
                 Fragment newF = new EventInfo();
