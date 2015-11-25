@@ -34,6 +34,7 @@ import com.apress.gerber.ucsdbulletinboard.CreateAccountAct;
 import com.apress.gerber.ucsdbulletinboard.CreateEvent;
 import com.apress.gerber.ucsdbulletinboard.LoginActivity;
 import com.apress.gerber.ucsdbulletinboard.MainActivity;
+import com.apress.gerber.ucsdbulletinboard.Profile;
 import com.apress.gerber.ucsdbulletinboard.R;
 import com.apress.gerber.ucsdbulletinboard.adapter.NavListAdapter;
 import com.apress.gerber.ucsdbulletinboard.models.NavItem;
@@ -333,8 +334,11 @@ public class Login extends Fragment {
 
     public void putNamesOnMainList(){
         System.out.println("does this run?");
-            TextView t = (TextView) getActivity().findViewById(R.id.name_mainMenu);
-            t.setText((firstName + " " + lastName).toString());
+        TextView t = (TextView) getActivity().findViewById(R.id.name_mainMenu);
+        t.setText((firstName + " " + lastName).toString());
+
+        Profile.name = (firstName + " " + lastName).toString();
+
     }
 
 

@@ -13,7 +13,7 @@
         android:hint="Name"
         android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/name"
+        android:id="@+id/profilename"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -24,8 +24,8 @@
         android:hint="Email"
         android:inputType="textEmailAddress"
         android:ems="10"
-        android:id="@+id/email"
-        android:layout_below="@+id/name"
+        android:id="@+id/profileemail"
+        android:layout_below="@+id/profilename"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -36,7 +36,7 @@
         android:inputType="phone"
         android:ems="10"
         android:id="@+id/phone"
-        android:layout_below="@+id/email"
+        android:layout_below="@+id/profileemail"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
