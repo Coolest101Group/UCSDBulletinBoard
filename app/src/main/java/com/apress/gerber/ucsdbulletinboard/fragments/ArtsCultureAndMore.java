@@ -75,7 +75,7 @@ public class ArtsCultureAndMore extends Fragment {
         for (int i = 0; i < eventArrayList.size(); i++){
             tmpEvent = eventArrayList.get(i);
             Log.i("CreateEvent", "master array NOT EMPTY");
-            if(CreateEvent.getIndividualEventCategory(tmpEvent) == ART){
+            if(CreateEvent.checkIndividualEventCategory(tmpEvent,ART)){
                 String time = tmpEvent.getEventTime() + " at " + tmpEvent.getHour() + ":" + tmpEvent.getMinute();
                 mNavItemList.add(new NavItem(tmpEvent.getEventName(), time, R.drawable.event8));
                 Log.i("CreateEvent", "Arts array NOT EMPTY");
@@ -96,7 +96,7 @@ public class ArtsCultureAndMore extends Fragment {
         for(int i = 0; i < eventArrayList.size(); i++){
             tmpEvent = eventArrayList.get(i);
 
-            if(CreateEvent.getIndividualEventCategory(tmpEvent) == ART){
+            if(CreateEvent.checkIndividualEventCategory(tmpEvent,ART)){
                 Bundle bundle = new Bundle();
                 bundle.putInt("idEvent", i);
                 Fragment newF = new EventInfo();

@@ -74,7 +74,7 @@ public class FitnessAndWellBeing extends Fragment {
 
         for (int i = 0; i < eventArrayList.size(); i++){
             tmpEvent = eventArrayList.get(i);
-            if(CreateEvent.getIndividualEventCategory(tmpEvent) == FITNESS){
+            if(CreateEvent.checkIndividualEventCategory(tmpEvent,FITNESS)){
                 String time = tmpEvent.getEventTime() + " at " + tmpEvent.getHour() + ":" + tmpEvent.getMinute();
                 mNavItemList.add(new NavItem(tmpEvent.getEventName(), time, R.drawable.event8));
             }
@@ -90,7 +90,7 @@ public class FitnessAndWellBeing extends Fragment {
         mFragmentList = new ArrayList<Fragment>();
         for(int i = 0; i < eventArrayList.size(); i++){
             tmpEvent = eventArrayList.get(i);
-            if(CreateEvent.getIndividualEventCategory(tmpEvent) == FITNESS){
+            if(CreateEvent.checkIndividualEventCategory(tmpEvent,FITNESS)){
                 Bundle bundle = new Bundle();
                 bundle.putInt("idEvent", i);
                 Fragment newF = new EventInfo();

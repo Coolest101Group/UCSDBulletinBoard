@@ -335,12 +335,14 @@ public class CreateEvent extends AppCompatActivity {
      *  Method that takes an event and retrieves its unmasked
      *  category
      */
-    public static int getIndividualEventCategory(myEvent event){
+    public static boolean checkIndividualEventCategory(myEvent event, int cat){
         int category = event.getCat();
 
         // TODO: Get unmasked category
-
-        return category;
+        if((category & cat) > 0)
+            return true;
+        else
+            return false;
     }
 
 }
