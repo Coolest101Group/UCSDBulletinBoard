@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,13 +44,14 @@ public class GenericFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        mV = inflater.inflate(R.layout.fragment_communityinvolve, container, false);
+        mV = inflater.inflate(R.layout.generic_fragment, container, false);
         navFE = (ListView) mV.findViewById(R.id.nav_list_fe);
         Bundle args = this.getArguments();
 
         THIS_FRAGMENT_CATEGORY = args.getInt("cat");
 
         tt = (TextView) mV.findViewById(R.id.textViewGeneric);
+        if(tt == null) Log.i("GenericFragent", "tt is NULL");
         tt.setText(catString());
 
 
