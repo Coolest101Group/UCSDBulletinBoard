@@ -2,8 +2,10 @@ package com.apress.gerber.ucsdbulletinboard;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
@@ -99,8 +101,9 @@ public class CreateEvent extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 addEventDB();
+                }
             }
-        });
+        );
         Button mAddCamera = (Button) findViewById(R.id.select_from_camera);
         mAddCamera.setOnClickListener(new View.OnClickListener() {
             @Override

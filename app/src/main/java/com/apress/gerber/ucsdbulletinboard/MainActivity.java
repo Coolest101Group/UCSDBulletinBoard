@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -139,7 +140,8 @@ public class MainActivity extends ActionBarActivity{
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager
                 .beginTransaction()
-                .replace(R.id.main_content, mFragmentList.get(0))
+                .replace(R.id.main_content, mFragmentList.get(loggedIn ? 1 : 0))
+                .addToBackStack("Login")
                 .commit();
         setTitle(mNavItemList.get(0).getTitle());
         lvNav.setItemChecked(0, true);
@@ -150,10 +152,11 @@ public class MainActivity extends ActionBarActivity{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                //this is a little hacky but lets see if it works
-               if(loggedIn && position == 1){ //position 1 should be the manage account button
-                  activitySwitcher(1);
-                }
+                //logging in adds profile button so position gets adjusted
+               if(loggedIn && position > 2) position--;
+               if(loggedIn && position==1){
+                   showProfile();
+               }
 
                 // replace fragment with one selected by user
                 FragmentManager fragmentManager = getSupportFragmentManager();
@@ -175,11 +178,11 @@ public class MainActivity extends ActionBarActivity{
                     public void onBackStackChanged() {
 
 
-                        setTitle("Featured Events");
+                        //setTitle("Featured Events");
 
                         //first time login work. adds logout and manage account buttons
                         if (loggedIn && firstTimeLogin) {
-                            System.out.println("This logged in IF statement is running");
+                            /*System.out.println("This logged in IF statement is running");
                             mNavItemList.get(0).setTitle("Logout");
                             mNavItemList.get(0).setResIcon(R.drawable.logout);
 
@@ -190,7 +193,7 @@ public class MainActivity extends ActionBarActivity{
                                     getApplicationContext(), R.layout.item_nav_list, mNavItemList);
 
                             lvNav.setAdapter(navListAdapter);
-                            firstTimeLogin = false; //now its no longer the first time
+                            firstTimeLogin = false; //now its no longer the first time */
                         }
 
 
@@ -274,13 +277,10 @@ public class MainActivity extends ActionBarActivity{
         mActionBarDrawerToggle.syncState();
     }
 
-    void activitySwitcher(int itemSelected){
+    void showProfile() {
         Intent newIntent;
-        if(itemSelected == 1) {
-            newIntent = new Intent(this, Profile.class);
-            this.startActivity(newIntent);
-        }
-
+        newIntent = new Intent(this, Profile.class);
+        this.startActivity(newIntent);
     }
 
 

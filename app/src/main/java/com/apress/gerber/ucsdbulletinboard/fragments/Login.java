@@ -35,6 +35,8 @@ import com.apress.gerber.ucsdbulletinboard.CreateEvent;
 import com.apress.gerber.ucsdbulletinboard.LoginActivity;
 import com.apress.gerber.ucsdbulletinboard.MainActivity;
 import com.apress.gerber.ucsdbulletinboard.R;
+import com.apress.gerber.ucsdbulletinboard.adapter.NavListAdapter;
+import com.apress.gerber.ucsdbulletinboard.models.NavItem;
 import com.firebase.client.AuthData;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -67,8 +69,31 @@ public class Login extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, final Bundle savedInstanceState) {
+
+        //this login class also gets called to logout
+        //this is the logout logic
+        if(MainActivity.loggedIn && !MainActivity.firstTimeLogin) {
+            MainActivity.mNavItemList.get(0).setTitle("Login");
+            MainActivity.mNavItemList.get(0).setResIcon(R.drawable.login17);
+            MainActivity.mNavItemList.remove(1);
+            MainActivity.loggedIn = false;
+
+            new AlertDialog.Builder(getContext())
+                    .setMessage("You've been successfully logged out")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+
+                                    //pop back to main activity
+                                    getFragmentManager().popBackStack();
+                                }
+                            }
+                    )
+                    .create()
+                    .show();
+        }
+
         mV = inflater.inflate(R.layout.activity_login, container, false);
 
 
@@ -81,7 +106,7 @@ public class Login extends Fragment {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
+                    attemptLogin(savedInstanceState);
                     return true;
                 }
                 return false;
@@ -92,7 +117,7 @@ public class Login extends Fragment {
         mEmailSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLogin();
+                attemptLogin(savedInstanceState); //makes global loggedin bool true if works
             }
         });
 
@@ -118,11 +143,12 @@ public class Login extends Fragment {
      * If there are form errors (invalid email, missing fields, etc.), the
      * errors are presented and no actual login attempt is made.
      */
-    public void attemptLogin() {
+    public void attemptLogin(final Bundle savedInstanceState) {
 
         // Reset errors.
         mEmailView.setError(null);
         mPasswordView.setError(null);
+
 
         // Store values at the time of the login attempt.
         email = mEmailView.getText().toString();
@@ -174,32 +200,9 @@ public class Login extends Fragment {
                             firstName = theNames.getFirstName();
                             lastName = theNames.getLastName();
 
-                            //now display the name on the main ui
-                            putNamesOnMainList();
-
-                            //change state to logged in
-                            MainActivity.loggedIn = true;
+                            if (firstName != null && lastName != null) putNamesOnMainList();
 
 
-
-                           // ((MainActivity)getActivity()).switchToLoggedIn();
-
-                            showProgress(false); //stop progress spinner
-
-                            //show success message alert
-                            new AlertDialog.Builder(getContext())
-                                    .setMessage("Login Successful")
-                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                                public void onClick(DialogInterface dialog, int id) {
-                                                    dialog.cancel();
-
-                                                    //pop back to main activity
-                                                    getFragmentManager().popBackStack();
-                                                }
-                                            }
-                                    )
-                                    .create()
-                                    .show();
                         }
 
                         @Override
@@ -207,29 +210,66 @@ public class Login extends Fragment {
                             System.out.println("The read failed: " + firebaseError.getMessage());
                         }
                     });
+                    ///change state to logged in
+                    MainActivity.loggedIn = true;
 
-                }
-                @Override
-                public void onAuthenticationError(FirebaseError firebaseError) {
-                    // there was an error
                     showProgress(false); //stop progress spinner
 
-                    //show error message alert
+                    //show success message alert
                     new AlertDialog.Builder(getContext())
-                            .setMessage(firebaseError.getMessage())
+                            .setMessage("Login Successful")
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int id) {
                                             dialog.cancel();
+
+                                            System.out.println("This logged in IF statement is running");
+                                            MainActivity.mNavItemList.get(0).setTitle("Logout");
+                                            MainActivity.mNavItemList.get(0).setResIcon(R.drawable.logout);
+
+                                            MainActivity.mNavItemList.add(1, new NavItem("Manage Account", " ", R.drawable.mng_account));
+
+
+                                            NavListAdapter navListAdapter = new NavListAdapter(
+                                                    getActivity().getApplicationContext(), R.layout.item_nav_list, MainActivity.mNavItemList);
+
+                                            MainActivity.lvNav.setAdapter(navListAdapter);
+                                            MainActivity.firstTimeLogin = false; //now its no longer the first time
+
+                                            //pop back to main activity
+                                            getFragmentManager().popBackStack();
                                         }
                                     }
-                            )
+                                        )
+
                             .create()
                             .show();
+                            }
+
+                    @Override
+                    public void onAuthenticationError (FirebaseError firebaseError){
+                        // there was an error
+                        showProgress(false); //stop progress spinner
+
+                        //show error message alert
+                        new AlertDialog.Builder(getContext())
+                                .setMessage(firebaseError.getMessage())
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+                                                dialog.cancel();
+                                            }
+                                        }
+                                )
+                                .create()
+                                .show();
+                    }
                 }
-            });
-            //code from the skeleton. decide what to do with it later
-            //mAuthTask = new UserLoginTask(email, password);
-            //mAuthTask.execute((Void) null);
+
+                );
+
+        }
+    if(MainActivity.loggedIn) {
+        putNamesOnMainList();
+        getFragmentManager().popBackStack();
         }
     }
 
@@ -293,8 +333,8 @@ public class Login extends Fragment {
 
     public void putNamesOnMainList(){
         System.out.println("does this run?");
-        TextView t = (TextView) getActivity().findViewById(R.id.name_mainMenu);
-        t.setText((firstName + " " + lastName).toString());
+            TextView t = (TextView) getActivity().findViewById(R.id.name_mainMenu);
+            t.setText((firstName + " " + lastName).toString());
     }
 
 

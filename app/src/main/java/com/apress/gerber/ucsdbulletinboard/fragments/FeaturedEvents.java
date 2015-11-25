@@ -1,5 +1,7 @@
 package com.apress.gerber.ucsdbulletinboard.fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -61,8 +63,31 @@ public class FeaturedEvents extends Fragment {
         addPNG.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), CreateEvent.class);
-                startActivity(intent);
+                //check if the user is logged in
+                if(MainActivity.loggedIn) {
+                    Intent intent = new Intent(getActivity(), CreateEvent.class);
+                    startActivity(intent);
+                }
+                //if they are not logged in, give em hell
+                else {
+                    new AlertDialog.Builder(getContext())
+                            .setMessage("You must be logged in to create an event")
+                            .setPositiveButton("Go To Login", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    getFragmentManager().popBackStack("Login",0);
+                                    getActivity().setTitle("Login");
+                                }
+                            }
+                            )
+                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                        }
+                                    }
+                            )
+                            .create()
+                            .show();
+                }
             }
         });
 
