@@ -107,26 +107,31 @@ public class MainActivity extends ActionBarActivity{
         GenericFragment arts = new GenericFragment();
         Bundle bundle_art = new Bundle();
         bundle_art.putInt("cat", CreateEvent.ART);
+        arts.setArguments(bundle_art);
         mFragmentList.add(arts);
 
         GenericFragment fitness = new GenericFragment();
         Bundle bundle_fit = new Bundle();
         bundle_fit.putInt("cat", CreateEvent.FITNESS);
+        fitness.setArguments(bundle_fit);
         mFragmentList.add(fitness);
 
         GenericFragment sem = new GenericFragment();
         Bundle bundle_sem = new Bundle();
         bundle_sem.putInt("cat", CreateEvent.INFO);
+        sem.setArguments(bundle_sem);
         mFragmentList.add(sem);
 
         GenericFragment com = new GenericFragment();
         Bundle bundle_com = new Bundle();
         bundle_com.putInt("cat", CreateEvent.COMINV);
+        com.setArguments(bundle_com);
         mFragmentList.add(com);
 
         GenericFragment wk = new GenericFragment();
         Bundle bundle_wk = new Bundle();
         bundle_wk.putInt("cat", CreateEvent.WEEKEND);
+        wk.setArguments(bundle_wk);
         mFragmentList.add(wk);
         ///////////////////////
 

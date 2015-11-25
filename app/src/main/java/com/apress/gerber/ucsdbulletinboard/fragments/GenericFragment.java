@@ -45,7 +45,8 @@ public class GenericFragment extends Fragment {
 
         mV = inflater.inflate(R.layout.fragment_communityinvolve, container, false);
         navFE = (ListView) mV.findViewById(R.id.nav_list_fe);
-        Bundle args = getArguments();
+        Bundle args = this.getArguments();
+
         THIS_FRAGMENT_CATEGORY = args.getInt("cat");
 
         tt = (TextView) mV.findViewById(R.id.textViewGeneric);
