@@ -1,5 +1,6 @@
 package com.apress.gerber.ucsdbulletinboard;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
@@ -136,13 +137,9 @@ public class MainActivity extends ActionBarActivity{
         mFragmentList.add(wk);
         ///////////////////////
 
-        // Load Event fragemnt as default
+        // Load Event fragment as default
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager
-                .beginTransaction()
-                .replace(R.id.main_content, mFragmentList.get(loggedIn ? 1 : 0))
-                .addToBackStack("Login")
-                .commit();
+        fragmentManager.beginTransaction().replace(R.id.main_content, mFragmentList.get(loggedIn ? 1 : 0)).addToBackStack("Login").commit();
         setTitle(mNavItemList.get(0).getTitle());
         lvNav.setItemChecked(0, true);
         mDrawerLayout.closeDrawer(mDrawerPane);
@@ -275,6 +272,20 @@ public class MainActivity extends ActionBarActivity{
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         mActionBarDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode == Activity.RESULT_OK) {
+            if (data != null) {
+                //TODO: read data sent from child fragment (firstname and lastname)
+                String firstname = getIntent().getStringExtra("firstname");
+                String lastname = getIntent().getStringExtra("lastname");
+                TextView name = (TextView) findViewById(R.id.name_mainMenu);
+                name.setText(firstname + " " + lastname);
+                Log.d("name", firstname+lastname);
+            }
+        }
     }
 
     void showProfile() {

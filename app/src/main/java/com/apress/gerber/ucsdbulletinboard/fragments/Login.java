@@ -3,6 +3,7 @@ package com.apress.gerber.ucsdbulletinboard.fragments;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
@@ -17,6 +18,7 @@ import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -222,7 +224,6 @@ public class Login extends Fragment {
                                         public void onClick(DialogInterface dialog, int id) {
                                             dialog.cancel();
 
-                                            System.out.println("This logged in IF statement is running");
                                             MainActivity.mNavItemList.get(0).setTitle("Logout");
                                             MainActivity.mNavItemList.get(0).setResIcon(R.drawable.logout);
 
@@ -262,14 +263,18 @@ public class Login extends Fragment {
                                 .create()
                                 .show();
                     }
-                }
-
-                );
+                });
 
         }
-    if(MainActivity.loggedIn) {
-        putNamesOnMainList();
-        getFragmentManager().popBackStack();
+        if(MainActivity.loggedIn) {
+            //putNamesOnMainList();
+            //TODO: Finish sending first name and last name to parent fragment
+            Intent intent = new Intent();
+            intent.putExtra("firstname", firstName);
+            intent.putExtra("lastname", lastName);
+            getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, intent);
+            Log.d("here", "IM HERE!!!");
+            getFragmentManager().popBackStack();
         }
     }
 
@@ -331,8 +336,8 @@ public class Login extends Fragment {
 
     }
 
-    public void putNamesOnMainList(){
-        //TODO: THIS DOESN'T BELONG HERE; there is no name_mainMenu textview in the login form xml
+    public void putNamesOnMainList() {
+        //TODO: there is no name_mainMenu textview in the login form xml
         //TextView t = (TextView) getActivity().findViewById(R.id.name_mainMenu);
         //t.setText((firstName + " " + lastName).toString());
 

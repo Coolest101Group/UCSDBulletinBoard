@@ -15,7 +15,7 @@
 
     </RelativeLayout>
 
-    <!-- Drawer Pand -->
+    <!-- Drawer Pane -->
     <RelativeLayout
         android:id="@+id/drawer_pane"
         android:layout_width="280dp"
