@@ -3,6 +3,7 @@ package com.apress.gerber.ucsdbulletinboard;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
+import android.util.Log;
 
 /**
  * Created by danielmartin on 11/3/15.
@@ -117,8 +118,41 @@ public class myEvent {
         return cat;
     }
 
+    public int compareTo(myEvent other) {
 
-
-
+        if(this.year < other.getYear()) {
+            return 1;
+        }
+        else if(this.year > other.getYear()) {
+            return -1;
+        }
+        else if(this.month < other.getMonth()) {
+            return 1;
+        }
+        else if(this.month > other.getMonth()) {
+            return -1;
+        }
+        else if (this.day < other.getDay()) {
+            return 1;
+        }
+        else if (this.day > other.getDay()) {
+            return -1;
+        }
+        else if (this.hour < other.getHour()) {
+            return 1;
+        }
+        else if (this.hour > other.getHour()) {
+            return -1;
+        }
+        else if (this.minute < other.getMinute()) {
+            return 1;
+        }
+        else if (this.minute > other.getMinute()) {
+            return -1;
+        }
+        else {
+            return 0;
+        }
+    }
 
 }

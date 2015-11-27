@@ -23,7 +23,9 @@ import com.apress.gerber.ucsdbulletinboard.models.NavItem;
 import com.apress.gerber.ucsdbulletinboard.myEvent;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Collections;
 
 /**
  * Created by danielmartin on 10/23/15.
@@ -76,6 +78,14 @@ public class GenericFragment extends Fragment {
         mNavItemList = new ArrayList<NavItem>();
         myEvent tmpEvent;
         ArrayList<myEvent> eventArrayList = MainActivity.eventArrayList;
+
+        //sort event list in chronological order
+        Collections.sort(eventArrayList, new Comparator<myEvent>() {
+            @Override
+            public int compare(myEvent event1, myEvent event2) {
+                return event1.compareTo(event2);
+            }
+        });
 
 
         for (int i = 0; i < eventArrayList.size(); i++){

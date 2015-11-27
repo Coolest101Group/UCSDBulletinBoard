@@ -97,7 +97,6 @@ public class Login extends Fragment {
 
         mV = inflater.inflate(R.layout.activity_login, container, false);
 
-
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) mV.findViewById(R.id.email);
 
@@ -333,11 +332,11 @@ public class Login extends Fragment {
     }
 
     public void putNamesOnMainList(){
-        System.out.println("does this run?");
-        TextView t = (TextView) getActivity().findViewById(R.id.name_mainMenu);
-        t.setText((firstName + " " + lastName).toString());
+        //TODO: THIS DOESN'T BELONG HERE; there is no name_mainMenu textview in the login form xml
+        //TextView t = (TextView) getActivity().findViewById(R.id.name_mainMenu);
+        //t.setText((firstName + " " + lastName).toString());
 
-        Profile.name = (firstName + " " + lastName).toString();
+        //Profile.name = (firstName + " " + lastName).toString();
 
     }
 
