@@ -3,9 +3,11 @@ package com.apress.gerber.ucsdbulletinboard;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -90,6 +92,10 @@ public class MainActivity extends ActionBarActivity{
         mNavItemList.add(new NavItem("Seminar/Info Sessions", " ", R.drawable.sciences));
         mNavItemList.add(new NavItem("Community Involvement", " ", R.drawable.network11));
         mNavItemList.add(new NavItem("Weekend Events", " ", R.drawable.fun1));
+
+
+        Drawable drawerPanelBackground = ContextCompat.getDrawable(getApplicationContext(), R.drawable.background_feather);
+        drawerPanelBackground.setAlpha(150);
 
         NavListAdapter navListAdapter = new NavListAdapter(
                 getApplicationContext(), R.layout.item_nav_list, mNavItemList);

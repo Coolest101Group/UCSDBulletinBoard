@@ -2,9 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:orientation="vertical"
-
     android:background="@drawable/background_feather"
     android:alpha = "1">
 
@@ -40,7 +38,7 @@
             android:id="@+id/nav_list_fe"
             android:choiceMode="singleChoice"
             android:background="@color/title_color"
-            android:alpha="0.5">
+            android:alpha="0.8">
 
         </ListView>
 
