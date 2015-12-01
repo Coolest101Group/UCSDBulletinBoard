@@ -47,7 +47,7 @@ public class CommunityInvolve extends Fragment {
 
 
         ImageView addPNG = (ImageView) mV.findViewById(R.id.add_new_event_png);
-        addPNG.setImageResource(R.drawable.add182);
+        addPNG.setImageResource(R.drawable.add183);
         addPNG.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
