@@ -6,7 +6,9 @@
                                         android:layout_height="match_parent"
                                         xmlns:tools="http://schemas.android.com/tools"
                                         android:id="@+id/drawer_layout"
-                                        tools:context="com.apress.gerber.ucsdbulletinboard.MainActivity">
+                                        tools:context="com.apress.gerber.ucsdbulletinboard.MainActivity"
+    android:background="@drawable/background_feather"
+    android:alpha = "1">
 <!-- Main Screen -->
     <RelativeLayout
         android:id="@+id/main_content"

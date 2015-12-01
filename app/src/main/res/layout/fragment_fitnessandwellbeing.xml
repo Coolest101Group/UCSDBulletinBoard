@@ -2,18 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_feather"
+    android:alpha = "1"
     android:orientation="vertical"
     android:weightSum="1">
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-
         android:text="Fiteness and WellBeing"
         android:gravity="center"
-        android:textSize="20sp"
-        android:textColor="#000000"
-        android:background="@color/event_color"
+        android:textSize="24dp"
+        android:textColor="@color/text_large_color"
         android:textStyle="bold"
         android:id="@+id/textView"/>
 
@@ -37,7 +37,8 @@
             android:id="@+id/nav_list_fe"
             android:layout_below="@+id/p_box"
             android:choiceMode="singleChoice"
-            android:background="#ffffff">
+            android:background="@color/title_color"
+            android:alpha="0.5">
 
         </ListView>
 

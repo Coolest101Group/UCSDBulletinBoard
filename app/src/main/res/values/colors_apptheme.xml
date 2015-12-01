@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="apptheme_color">#1133e3</color>
-    <color name="event_color">#3399ff</color>
+    <color name="apptheme_color">#e2dcf7</color>
+    <color name="event_color">#8972ff</color>
+    <color name="title_color">#f2d3e9</color>
+    <color name="subtitle_color">#e1eeea</color>
+    <color name="text_large_color">#F0F8FF</color>
+    <color name="color_pink">#E93E80</color>
 </resources>

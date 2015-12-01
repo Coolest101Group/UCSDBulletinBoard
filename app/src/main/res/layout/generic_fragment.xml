@@ -3,7 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:orientation="vertical">
+    android:orientation="vertical"
+
+    android:background="@drawable/background_feather"
+    android:alpha = "1">
 
     <!--<ImageView
         android:layout_width="match_parent"
@@ -16,9 +19,8 @@
         android:layout_height="wrap_content"
         android:text="Arts, Culture and More"
         android:gravity="center"
-        android:textSize="20sp"
-        android:textColor="#000000"
-        android:background="@color/event_color"
+        android:textSize="24dp"
+        android:textColor="@color/text_large_color"
         android:textStyle="bold"
         android:id="@+id/textViewGeneric"
         android:layout_alignParentTop="true"
@@ -37,7 +39,8 @@
             android:layout_height="match_parent"
             android:id="@+id/nav_list_fe"
             android:choiceMode="singleChoice"
-            android:background="#ffffff">
+            android:background="@color/title_color"
+            android:alpha="0.5">
 
         </ListView>
 
