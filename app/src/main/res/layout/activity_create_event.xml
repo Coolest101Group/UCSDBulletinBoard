@@ -23,7 +23,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
-    </ScrollView>
+
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -266,5 +266,6 @@
             android:textColor="@color/text_large_color"
             android:background="@color/color_pink"/>
     </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>
