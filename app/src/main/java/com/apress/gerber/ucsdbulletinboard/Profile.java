@@ -6,6 +6,7 @@ import android.widget.EditText;
 
 public class Profile extends AppCompatActivity {
     public static String name = "";
+    public static String email = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -15,7 +16,9 @@ public class Profile extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        EditText labelView = (EditText) findViewById(R.id.profilename);
-        labelView.setText(name);
+        EditText nameBox = (EditText) findViewById(R.id.profilename);
+        EditText emailBox = (EditText) findViewById(R.id.profileemail);
+        nameBox.setText(name);
+        emailBox.setText(email);
     }
 }

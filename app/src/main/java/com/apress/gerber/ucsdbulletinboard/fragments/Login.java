@@ -350,7 +350,8 @@ public class Login extends Fragment {
             //this takes the name off when user logs off
         else if (!puttingNamesOn) t.setText("Not logged in");
 
-        //Profile.name = (firstName + " " + lastName).toString();
+        Profile.name = (firstName + " " + lastName).toString();
+        Profile.email = email;
     }
 
 
