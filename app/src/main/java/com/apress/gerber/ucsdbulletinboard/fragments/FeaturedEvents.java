@@ -94,11 +94,7 @@ public class FeaturedEvents extends Fragment {
             }
         });
 
-
         populateList();
-
-
-
 
         return mV;
     }

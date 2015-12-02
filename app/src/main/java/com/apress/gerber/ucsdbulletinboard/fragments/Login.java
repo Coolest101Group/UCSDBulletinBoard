@@ -76,20 +76,27 @@ public class Login extends Fragment {
 
         //this login class also gets called to logout
         //this is the logout logic
-        if(MainActivity.loggedIn && !MainActivity.firstTimeLogin) {
+        if (MainActivity.loggedIn && !MainActivity.firstTimeLogin) {
+            //change the main menu list back to not logged in state
             MainActivity.mNavItemList.get(0).setTitle("Login");
             MainActivity.mNavItemList.get(0).setResIcon(R.drawable.login17);
             MainActivity.mNavItemList.remove(1);
+            putNamesOnMainList(false); //with false this takes the name off
+
+            //reload the main menu list
+            NavListAdapter navListAdapter = new NavListAdapter(
+                    getActivity().getApplicationContext(), R.layout.item_nav_list, MainActivity.mNavItemList);
+            MainActivity.lvNav.setAdapter(navListAdapter);
+
+            //reset our login globals
             MainActivity.loggedIn = false;
+            MainActivity.firstTimeLogin = true;
 
             new AlertDialog.Builder(getContext())
                     .setMessage("You've been successfully logged out")
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     dialog.cancel();
-
-                                    //pop back to main activity
-                                    getFragmentManager().popBackStack();
                                 }
                             }
                     )
@@ -137,7 +144,6 @@ public class Login extends Fragment {
 
         return mV;
     }
-
 
 
     /**
@@ -201,10 +207,6 @@ public class Login extends Fragment {
 
                             firstName = theNames.getFirstName();
                             lastName = theNames.getLastName();
-
-                            if (firstName != null && lastName != null) putNamesOnMainList();
-
-
                         }
 
                         @Override
@@ -224,57 +226,48 @@ public class Login extends Fragment {
                                         public void onClick(DialogInterface dialog, int id) {
                                             dialog.cancel();
 
+                                            //login auth was successful, so here's a bunch of grunt work
+                                            putNamesOnMainList(true);
+
+                                            //adding logout and profile to the main menu list
                                             MainActivity.mNavItemList.get(0).setTitle("Logout");
                                             MainActivity.mNavItemList.get(0).setResIcon(R.drawable.logout);
-
                                             MainActivity.mNavItemList.add(1, new NavItem("Manage Account", " ", R.drawable.mng_account));
 
-
+                                            //reload the main menu list
                                             NavListAdapter navListAdapter = new NavListAdapter(
                                                     getActivity().getApplicationContext(), R.layout.item_nav_list, MainActivity.mNavItemList);
-
                                             MainActivity.lvNav.setAdapter(navListAdapter);
-                                            MainActivity.firstTimeLogin = false; //now its no longer the first time
 
                                             //pop back to main activity
                                             getFragmentManager().popBackStack();
                                         }
                                     }
-                                        )
+                            )
 
                             .create()
                             .show();
-                            }
+                }
 
-                    @Override
-                    public void onAuthenticationError (FirebaseError firebaseError){
-                        // there was an error
-                        showProgress(false); //stop progress spinner
+                @Override
+                public void onAuthenticationError(FirebaseError firebaseError) {
+                    // there was an error
+                    showProgress(false); //stop progress spinner
 
-                        //show error message alert
-                        new AlertDialog.Builder(getContext())
-                                .setMessage(firebaseError.getMessage())
-                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int id) {
-                                                dialog.cancel();
-                                            }
+                    //show error message alert
+                    new AlertDialog.Builder(getContext())
+                            .setMessage(firebaseError.getMessage())
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
                                         }
-                                )
-                                .create()
-                                .show();
-                    }
-                });
+                                    }
+                            )
+                            .create()
+                            .show();
+                }
+            });
 
-        }
-        if(MainActivity.loggedIn) {
-            //putNamesOnMainList();
-            //TODO: Finish sending first name and last name to parent fragment
-            Intent intent = new Intent();
-            intent.putExtra("firstname", firstName);
-            intent.putExtra("lastname", lastName);
-            getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, intent);
-            Log.d("here", "IM HERE!!!");
-            getFragmentManager().popBackStack();
         }
     }
 
@@ -325,24 +318,39 @@ public class Login extends Fragment {
     }
 
 
-    private static class names{
+    private static class names {
         String firstName;
         String lastName;
-        public names(){}
-        public void setFirstName(String firstName){this.firstName = firstName;}
-        public void setLastName(String lastName) {this.lastName = lastName;}
-        public String getFirstName(){return firstName;}
-        public String getLastName(){return lastName;}
 
+        public names() {
+        }
+
+        public void setFirstName(String firstName) {
+            this.firstName = firstName;
+        }
+
+        public void setLastName(String lastName) {
+            this.lastName = lastName;
+        }
+
+        public String getFirstName() {
+            return firstName;
+        }
+
+        public String getLastName() {
+            return lastName;
+        }
     }
 
-    public void putNamesOnMainList() {
-        //TODO: there is no name_mainMenu textview in the login form xml
-        //TextView t = (TextView) getActivity().findViewById(R.id.name_mainMenu);
-        //t.setText((firstName + " " + lastName).toString());
+    public void putNamesOnMainList(boolean puttingNamesOn) {
+        TextView t = (TextView) getActivity().findViewById(R.id.name_mainMenu);
+
+        //change the text element in the main menu list to user's name
+        if (puttingNamesOn) t.setText((firstName + " " + lastName).toString());
+            //this takes the name off when user logs off
+        else if (!puttingNamesOn) t.setText("Not logged in");
 
         //Profile.name = (firstName + " " + lastName).toString();
-
     }
 
 

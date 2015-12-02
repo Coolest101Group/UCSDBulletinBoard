@@ -146,8 +146,8 @@ public class MainActivity extends ActionBarActivity{
         // Load Event fragment as default
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.main_content, mFragmentList.get(loggedIn ? 1 : 0)).addToBackStack("Login").commit();
-        setTitle(mNavItemList.get(0).getTitle());
-        lvNav.setItemChecked(0, true);
+        setTitle(mNavItemList.get(loggedIn ? 1 : 0).getTitle());
+        lvNav.setItemChecked(loggedIn ? 2 : 0, true);
         mDrawerLayout.closeDrawer(mDrawerPane);
 
         // set listener for navigation items
@@ -156,8 +156,8 @@ public class MainActivity extends ActionBarActivity{
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 //logging in adds profile button so position gets adjusted
-               if(loggedIn && position > 2) position--;
-               if(loggedIn && position==1){
+               if(loggedIn && position >= 2) position--;
+               else if(loggedIn && position==1){
                    showProfile();
                }
 
@@ -168,8 +168,10 @@ public class MainActivity extends ActionBarActivity{
                         .addToBackStack("")
                         .replace(R.id.main_content, mFragmentList.get(position))
                         .commit();
-                setTitle(mNavItemList.get(position).getTitle());
-                lvNav.setItemChecked(position, true);
+                setTitle(mNavItemList.get(loggedIn ? position+1 : position).getTitle());
+                //theres one special case for setting the title when the user logs out
+                if(loggedIn && position==0) setTitle("Login");
+                lvNav.setItemChecked(loggedIn ? position+1 : position, true);
                 mDrawerLayout.closeDrawer(mDrawerPane);
 
             }
@@ -180,26 +182,17 @@ public class MainActivity extends ActionBarActivity{
                 new FragmentManager.OnBackStackChangedListener() {
                     public void onBackStackChanged() {
 
+                        //after popping out of login for the first time, we're defaulting to featured events
+                        if(loggedIn && firstTimeLogin) {
+                            FragmentManager fragmentManager = getSupportFragmentManager();
+                            fragmentManager.beginTransaction().replace(R.id.main_content, mFragmentList.get(1))
+                                    .addToBackStack("").commit();
+                            setTitle(mNavItemList.get(2).getTitle());
+                            lvNav.setItemChecked(2, true);
+                            mDrawerLayout.closeDrawer(mDrawerPane);
 
-                        //setTitle("Featured Events");
-
-                        //first time login work. adds logout and manage account buttons
-                        if (loggedIn && firstTimeLogin) {
-                            /*System.out.println("This logged in IF statement is running");
-                            mNavItemList.get(0).setTitle("Logout");
-                            mNavItemList.get(0).setResIcon(R.drawable.logout);
-
-                            mNavItemList.add(1, new NavItem("Manage Account", " ", R.drawable.mng_account));
-
-
-                            NavListAdapter navListAdapter = new NavListAdapter(
-                                    getApplicationContext(), R.layout.item_nav_list, mNavItemList);
-
-                            lvNav.setAdapter(navListAdapter);
-                            firstTimeLogin = false; //now its no longer the first time */
+                            firstTimeLogin = false;
                         }
-
-
                     }
                 });
 
