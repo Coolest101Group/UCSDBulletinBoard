@@ -18,7 +18,7 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        createEventActivity = new CreateEvent();
+        //createEventActivity = new CreateEvent();
 
         //TODO: Set up test cases by using findViewById to instantiate activity views, and run tests to see if they're functioning properly.
         //Example:
