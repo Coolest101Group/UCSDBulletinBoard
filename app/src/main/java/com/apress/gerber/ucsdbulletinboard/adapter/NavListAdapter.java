@@ -1,3 +1,5 @@
+//DO NOT DELETE
+
 package com.apress.gerber.ucsdbulletinboard.adapter;
 
 import android.content.Context;

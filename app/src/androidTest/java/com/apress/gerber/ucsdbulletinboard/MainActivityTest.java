@@ -41,8 +41,13 @@ public class MainActivityTest{
 
 
         // Create account
+        // Given I opened the app
+        // When I want to create an account
+        //I press a sign up button
         onView(withId(R.id.create_new_account_button))
                 .perform(click());
+
+        // then i fill my information
         onView(withId(R.id.firstName))
                 .perform(typeText("FirstNameTest"), closeSoftKeyboard());
         onView(withId(R.id.lastName))
@@ -70,6 +75,8 @@ public class MainActivityTest{
         onView(withText("OK")).perform(click());
 
         // Login
+        // Given i have an account
+        // When I input my nfo
         onView(withId(R.id.email))
                 .perform(typeText("testtest@email.com"), closeSoftKeyboard());
         onView(withId(R.id.password))
@@ -80,9 +87,11 @@ public class MainActivityTest{
         for(int i = Integer.MIN_VALUE; i < Integer.MAX_VALUE; ){
             i++;
         }
+        // I can login
         onView(withText("OK")).perform(click());
 
-        // Add an event
+        // Given I am logged in
+        // I can create an event
         onView(withId(R.id.add_new_event_png)).perform(click());
 
 

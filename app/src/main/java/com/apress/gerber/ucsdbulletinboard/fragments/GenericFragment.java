@@ -1,3 +1,5 @@
+//DO NOT DELETE
+
 package com.apress.gerber.ucsdbulletinboard.fragments;
 
 import android.app.AlertDialog;
